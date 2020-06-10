@@ -19,6 +19,15 @@ public class Book {
     private String description;
     
     private String imageLink;
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getImageLink() {
         return imageLink;
@@ -28,8 +37,7 @@ public class Book {
         this.imageLink = imageLink;
     }
    
-    private int noOfBooks;
-
+    
     public String getBookId() {
         return bookId;
     }
@@ -70,12 +78,4 @@ public class Book {
         this.description = description;
     }
 
-    public int getNoOfBooks() {
-        return noOfBooks;
-    }
-
-    public void setNoOfBooks(int noOfBooks) {
-        this.noOfBooks = noOfBooks;
-    }
-    
 }
