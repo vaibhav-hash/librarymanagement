@@ -18,6 +18,16 @@ public class Book {
     private String author;
     private String description;
     
+    private String imageLink;
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+   
     private int noOfBooks;
 
     public String getBookId() {
