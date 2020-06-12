@@ -9,8 +9,16 @@ and open the template in the editor.
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>nitinPersonalPractice.MyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>issueBook</servlet-name>
+        <servlet-class>issuebooks.issueBook</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>issueBook</servlet-name>
+        <url-pattern>/issueBook</url-pattern>
     </servlet-mapping>
 </web-app>

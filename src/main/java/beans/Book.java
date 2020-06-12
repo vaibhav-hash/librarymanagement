@@ -20,6 +20,11 @@ public class Book {
     
     private String imageLink;
     private String category;
+    private int Available;
+    
+    Book(){
+        this.Available = 1;
+    }
 
     public String getCategory() {
         return category;
