@@ -12,4 +12,8 @@ package beans;
 public class Admin extends Person{
     //this will only extend Person 
     //no other properties
+    Admin(String userName, String password, String email,
+            String firstName, String lastName, String imagePath){
+        super(userName, password, email, firstName, lastName, imagePath);
+    }
 }

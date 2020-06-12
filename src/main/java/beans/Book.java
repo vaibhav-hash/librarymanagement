@@ -12,18 +12,19 @@ package beans;
 public class Book {
     
     private String bookId;
-    private String name;
+    private String bookName;
    
-    private String publisher;
+    private String category;
     private String author;
+    private String publisher;
+   
     private String description;
     
-    private String imageLink;
-    private String category;
-    private int Available;
+    private String imagePath;
+    private String available; // this will be username
     
     Book(){
-        this.Available = 1;
+        this.available = "";
     }
 
     public String getCategory() {
@@ -34,12 +35,12 @@ public class Book {
         this.category = category;
     }
 
-    public String getImageLink() {
-        return imageLink;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
+    public void setImagePath(String imageLink) {
+        this.imagePath = imageLink;
     }
    
     
@@ -51,12 +52,12 @@ public class Book {
         this.bookId = bookId;
     }
 
-    public String getName() {
-        return name;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBookName(String name) {
+        this.bookName = name;
     }
 
     public String getPublisher() {
@@ -83,4 +84,14 @@ public class Book {
         this.description = description;
     }
 
+    public String getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(String available) {
+        this.available = available;
+    }
+    
+    
+    
 }

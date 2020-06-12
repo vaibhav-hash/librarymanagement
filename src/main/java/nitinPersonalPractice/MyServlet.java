@@ -48,8 +48,8 @@ public class MyServlet extends HttpServlet {
             out.println("</html>");
             
             try{
-                ConnectJDBC connectJDBC =  new ConnectJDBC();
-                Connection connect = connectJDBC.getConnection();
+                UseDB  connectJDBC =  new UseDB();
+                Connection connect = UseDB.getConnection();
                 
                 Statement state = connect.createStatement();
 

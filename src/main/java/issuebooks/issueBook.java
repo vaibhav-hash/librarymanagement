@@ -38,7 +38,7 @@ public class issueBook extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            ConnectJDBC connectJDBC = new ConnectJDBC();
+            UseDB connectJDBC = new UseDB();
             Connection connect = connectJDBC.getConnection();
             
             Statement state = connect.createStatement();
