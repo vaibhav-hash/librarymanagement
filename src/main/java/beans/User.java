@@ -13,10 +13,10 @@ import java.util.*;
  */
 public class User extends Person{
     
-    private ArrayList<String> booksIssued;
+    private String[] booksIssued;
     
     public User(String userName, String password, String email,
-            String firstName, String lastName, String imagePath, ArrayList<String> booksIssued){
+            String firstName, String lastName, String imagePath, String[] booksIssued){
         super(userName, password, email, firstName, lastName, imagePath);
         this.booksIssued = booksIssued;
     }
@@ -25,11 +25,11 @@ public class User extends Person{
         super();
     }
 
-    public ArrayList<String> getBooksIssued() {
+    public String[] getBooksIssued() {
         return booksIssued;
     }
 
-    public void setBooksIssued(ArrayList<String> booksIssued) {
+    public void setBooksIssued(String[] booksIssued) {
         this.booksIssued = booksIssued;
     }
     

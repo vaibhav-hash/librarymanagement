@@ -23,7 +23,21 @@ public class Book {
     private String imagePath;
     private String available; // this will be username
     
-    Book(){
+    public Book(String bookId, String bookName, String category,
+            String author, String publisher, String description,
+            String imagePath, String available){
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.category = category;
+        this.author = author;
+        this.publisher = publisher;
+        this.description = description;
+        this.imagePath = imagePath;
+        this.available = available;
+    }
+    
+    
+    public Book(){
         this.available = "";
     }
 
