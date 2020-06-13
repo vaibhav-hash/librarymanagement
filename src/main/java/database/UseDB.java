@@ -89,6 +89,31 @@ public class UseDB {
         return true;
     }
    
+    public static User getUser(String username){
+        
+        try{
+            final String query = "SELECT * FROM User WHERE username = ?";
+            
+            PreparedStatement pstate = connect.prepareStatement(query);
+            
+            pstate.setString(1, username);
+            
+            ResultSet rs = pstate.executeQuery();
+            User user = null;
+            if(rs.next()){
+                String password = rs.getString("password");
+                user = getUser(username, password);
+            }
+            
+            return user;
+            
+        }
+        catch(Exception e){
+            System.out.println("getUser exception caught");
+            return null;
+        }
+        
+    }
     public static User getUser(String username, String password){
     
         try{
@@ -390,7 +415,7 @@ public class UseDB {
             
             if(rs.next()){
                 
-                final String bookIssueinUser = "UPDATE User SET booksIssued = ?";
+                final String bookIssueinUser = "UPDATE User SET booksIssued = ? WHERE userName = ?";
                 ps = connect.prepareStatement(bookIssueinUser);
                 
                 String bookIssued;
@@ -565,7 +590,95 @@ public class UseDB {
         }
     }
     
+    public static boolean addIssueBooks(String username, String[] bookId){
+        
+        try{
+            final String query = "SELECT * FROM User WHERE username = ?";
+            
+            PreparedStatement ps = connect.prepareStatement(query);
+            
+            ps.setString(1, username);
+            
+            ResultSet rs = ps.executeQuery(query);
+            
+            if(rs.next()){
+                
+                if(bookId.length > 0){
+                    
+                    String[] bookIssued = rs.getString("booksIssued").split(",");
+                    
+                    String[] netBooks = new String[bookId.length + bookIssued.length];
+                    
+                    System.arraycopy(bookIssued, 0, netBooks, 0, bookIssued.length);
+                    System.arraycopy(bookId, 0, netBooks, bookIssued.length, bookId.length);
+                    
+                    setAvailableList(username, netBooks);
+   
+                }
+                return true;
+            }
+            
+            return false;
+        }
+        catch(Exception e){
+            System.out.println("addIssueBook exception caught");
+            return false;
+        }
+        
+    }
     
+    public static boolean removeIssueBooks(String username){
+        
+        try{
+            final String query = "SELECT * FROM User WHERE username = ?";
+            
+            PreparedStatement ps = connect.prepareStatement(query);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                
+                User user = getUser(username);
+                String[] booksIssued = user.getBooksIssued();
+                for(int i = 0; i<booksIssued.length; i++){
+                    setNotAvailable(booksIssued[i]);
+                }
+                
+                final String query2 = "UPDATE User SET booksIssued = ? WHERE username = ?";
+                
+                ps = connect.prepareStatement(query2);
+                
+                ps.setString(1, "");
+                
+                ps.executeUpdate();
+            }
+            
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("removeIssueBook caught exception");
+            return false;
+        }
+        
+    }
+    
+    public static boolean setNotAvailable(String bookId){
+        
+        try{
+            final String query = "UPDATE Book SET available = ? WHERE bookId = ?";
+            
+            PreparedStatement ps = connect.prepareStatement(query);
+            ps.setString(1, "");
+            ps.setString(2, bookId);
+            
+            ps.executeUpdate();
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("setNotAvailable exception caught");
+            return false;
+        }
+        
+    }
     
     
 }
