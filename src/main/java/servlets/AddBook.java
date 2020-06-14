@@ -26,12 +26,9 @@ import javax.servlet.http.Part;
  *
  * @author Administrator
  */
-@MultipartConfig(fileSizeThreshold=1024*1024*10, 	// 10 MB 
-                 maxFileSize=1024*1024*50,      	// 50 MB
-                 maxRequestSize=1024*1024*100)   	// 100 MB
+
 public class AddBook extends HttpServlet {
 
-    private static final String SAVE_DIR = "image_folder";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,15 +53,7 @@ public class AddBook extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-//        String savePath = "C:/Users/Administrator/Doc uments/NetBeansProjects/mavenproject2/"
-//                + "librarymanagement/web" + File.separator + SAVE_DIR;
-        
-        String savePath = "C:\\Users\\Administrator\\Documents\\NetBeansProjects\\mavenproject2\\librarymanagement\\"
-                + File.separator + SAVE_DIR;
-        
-        File fileSaveDir = new File(savePath);
-        
+  
         String bookId = request.getParameter("bookId");
         String bookName = request.getParameter("bookName");
         String category = request.getParameter("category");
@@ -72,19 +61,12 @@ public class AddBook extends HttpServlet {
         String publisher = request.getParameter("publisher");
         String description = request.getParameter("description");
         
-        Part part = request.getPart("file");
-        
-        String filename = extractFileName(part);
-        
-        part.write(savePath + File.separator + filename);
-        
-        
-        
+
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-               String filePath = savePath + File.separator + filename;
+//               String filePath = savePath + File.separator + filename;
                
-               Book book = new Book(bookId, bookName, category, author, publisher, description, filePath, "");
+               Book book = new Book(bookId, bookName, category, author, publisher, description, "image_folder/book.jpg" , "");
                
                UseDB.addBook(book);
 //            request.getParameter(string)
@@ -132,14 +114,4 @@ public class AddBook extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private String extractFileName(Part part){
-        String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(",");
-        for(String s: items){
-            if(s.trim().startsWith("filename")){
-                return s.substring(s.indexOf("=") + 2, s.length() - 1);
-            }
-        }
-        return "";
-    }
 }
