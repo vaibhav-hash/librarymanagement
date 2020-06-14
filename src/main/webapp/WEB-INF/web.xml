@@ -31,4 +31,14 @@ and open the template in the editor.
         <servlet-name> AddBook</servlet-name>
         <url-pattern>/AddBook</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UserLogin</servlet-name>
+        <url-pattern>servlets.UserLoginServlet</url-pattern>
+    </servlet>
+    
+    <servlet-mapping>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/UserLogin</url-pattern>
+    </servlet-mapping>
 </web-app>

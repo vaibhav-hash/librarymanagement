@@ -44,6 +44,7 @@ public class RegistrationServlet extends HttpServlet {
             String password = request.getParameter("password").toString();
             
             
+            
             UseDB db = new UseDB();
             String result = db.isUserRepeated(uname,email);
             String message1 = " ";
