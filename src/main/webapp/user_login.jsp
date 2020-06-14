@@ -1,3 +1,10 @@
+<%@ page language="java" %>
+<%@ page import="java.util.*" %>
+<%@ page import="beans.*" %>
+<%@ page import="database.*" %>
+<%@ page import="issuebooks.*" %>
+<%@ page import="validate.*" %>
+<%@ page import="servlet.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +22,7 @@
                 <h1>Welcome Library Web System</h1><br>
                 <h2>Sign In For USERS</h2><br>
 
-                <form id="loginform" action="UserLogin.java" onsubmit="return(login())" method="GET">
+                <form id="loginform" action="/UserLogin" onsubmit="return(login())" method="GET">
                     <label>
                         <span>Username</span>
                         <input type="text" id="uname_l" name="uname" form="loginform" oninput="login()">
@@ -67,7 +74,7 @@
 <!--${pageContext.request.contextPath}-->
 
 
-                <form id="registerform" action="${pageContext.request.contextPath}/UserRegister" method="POST" onsubmit="return(register())">
+                <form id="registerform" action="${pageContext.request.contextPath}/Registration" method="POST" onsubmit="return(register())">
                     <div class="form sign-up" >
                         <br>
                         <h1>Welcome Library Web System</h1><br>
@@ -88,10 +95,10 @@
                             <span>Email</span>
                             <input type="email" name="email" id="email" form="registerform" oninput="register()">
                         </label>
-                        <label>
+<!--                        <label>
                             <span>Mobile</span>
                             <input type="tel" name="mobile" id="mobile" form="registerform" oninput="register()">
-                        </label>
+                        </label>-->
                         <label>
                             <span>Password</span>
                             <input type="password" name="password" id="pass" form="registerform" oninput="register()">
@@ -124,7 +131,7 @@
                                 var lnameF = document.getElementById("lname").value;
                                 var unameF = document.getElementById("uname").value;
                                 var emailF = document.getElementById("email").value;
-                                var mobile = document.getElementById("mobile").value;
+//                                var mobile = document.getElementById("mobile").value;
                                 var pass = document.getElementById("pass").value;
 
                                 var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -162,12 +169,12 @@
                                     return false;
                                 }
 
-                                if (isNaN(mobile) || mobile.length != 10)
-                                {
-                                    text = "Please Enter 10-digit Mobile";
-                                    error.innerHTML = text;
-                                    return false;
-                                }
+//                                if (isNaN(mobile) || mobile.length != 10)
+//                                {
+//                                    text = "Please Enter 10-digit Mobile";
+//                                    error.innerHTML = text;
+//                                    return false;
+//                                }
 
                                 if (!(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/.test(pass)))
                                 {
