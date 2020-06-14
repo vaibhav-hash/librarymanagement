@@ -20,7 +20,7 @@ public class UseDB {
     
     public UseDB() throws ClassNotFoundException, SQLException
     {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         connect = DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12346922", "sql12346922" , "E3T8PQ26Yn");
         createBookTable();
         createUserTable();
@@ -225,12 +225,58 @@ public class UseDB {
         }
     }
     
+    public static String isUserRepeated(String uname, String email)
+    {
+        try{
+            
+            final String query1 = "SELECT * FROM User WHERE userName = ?";
+            
+            PreparedStatement pstate1 = connect.prepareStatement(query1);
+            pstate1.setString(1, uname);
+            
+            ResultSet rs1 = pstate1.executeQuery();            
+            
+            final String query2 = "SELECT * FROM User WHERE email = ?";
+            
+            PreparedStatement pstate2 = connect.prepareStatement(query2);
+            pstate2.setString(1,email);
+            
+            ResultSet rs2 = pstate2.executeQuery();
+            
+            
+            if(rs1==null && rs2==null )
+            {
+                System.out.println("everything null");
+                return "false";
+                
+            }
+            else if( rs1!=null )
+            {
+                System.out.println(uname + " " + rs1.getString("userName"));
+                return "Username";
+            }
+            else
+            {
+                System.out.println(email + " " + rs2.getString("email"));
+                return "Email";
+            }
+                      
+           
+               
+        }
+        catch(Exception e){
+            System.out.println("isUserRepeated exception " + e.getMessage());
+            return "error";
+        }
+    }
     
     public static boolean addUser(User user){
         try{
             
-            final String query = "INSERT INTO User VALUES(?, ?, ?,"
-                    + "?, ?, ?, ?)";
+
+            final String query = "INSERT INTO User VALUES(?, ?, ?, ?, ?, ?, ?)";
+                   
+
             
             PreparedStatement pstate = connect.prepareStatement(query);
             
@@ -246,7 +292,7 @@ public class UseDB {
             return true;    
         }
         catch(Exception e){
-            System.out.println("Add user caught exception");
+            System.out.println("Add user caught exception " + e.getMessage());
             return false;
         }
     }
@@ -255,8 +301,10 @@ public class UseDB {
         
         try{
             
-            final String query = "INSERT INTO Admin VALUES(?, ?, ?,"
-                    + "?, ?, ?)";
+
+            final String query = "INSERT INTO Admin VALUES(?, ?, ?, ?, ?, ?)";
+                  
+
             
             PreparedStatement pstate = connect.prepareStatement(query);
             

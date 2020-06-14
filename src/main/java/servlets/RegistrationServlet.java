@@ -1,0 +1,127 @@
+
+package servlets;
+import beans.*;
+import com.mysql.cj.Session;
+import database.*;
+import issuebooks.*;
+import static java.awt.Color.green;
+import validate.*;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ *
+ * @author ayush
+ */
+@WebServlet(name = "Registration", urlPatterns = {"/Registration"})
+public class RegistrationServlet extends HttpServlet {
+
+
+    public  void service(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String destination = "";
+        HttpSession session = request.getSession();
+        
+        try
+        {    
+            String fname = request.getParameter("fname").toString();
+            String lname = request.getParameter("lname").toString();
+            String uname = request.getParameter("uname").toString();
+            String email = request.getParameter("email").toString();
+            String password = request.getParameter("password").toString();
+            
+            
+            UseDB db = new UseDB();
+            String result = db.isUserRepeated(uname,email);
+            String message1 = " ";
+            String message2 = " ";
+            String color = "";
+            
+            if( result=="false" )
+            {
+                String[] booksIssued = null;
+                User user;
+                user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
+                
+                db.addUser(user);
+                
+                session.setAttribute("user", user);  
+                
+                message1 = "Congrats " + fname + " " + lname + 
+                        " User Registration Successfull";
+                message2 =  "Redirecting to Home Page...";
+                color = "green";
+                destination = "/librarymanagement/UserHomePage";
+                
+            }
+            else if( result=="error" )
+            {
+                message1 = "Some error occured";
+                message2 = "Redirecting to User Login-Register Page....";
+                destination = "/librarymanagement/user_login.jsp";
+            }
+            else
+            {
+                message1 = result + " Already in Use - Try with another " + result; 
+                message2 = "Redirecting to User Login-Register Page....";
+                color = "red";
+                destination = "/librarymanagement/user_login.jsp";
+            }
+            
+            
+            response.setHeader("Refresh", "5; URL="+destination);
+            
+            
+            
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RegistrationServlet</title>");  
+            out.println("</head>");
+            out.println("<body><br>");
+            out.println("<h1>" +  message1 + "</h1><br>");
+            out.println("<h1>" +  message2 + "</h1><br>");
+            out.println("</body>");
+            out.println("</html>");
+            
+        
+//            response.setHeader("Refresh", "10; URL="+destination);
+
+            if( result=="false")
+            {
+                System.out.println("Going to Home Page");
+                
+            }
+            else
+            {
+                System.out.println("Going to LOgin Page");
+                
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error at Registration Servlet " + e.getMessage());
+            destination = "/librarymanagement/user_login.jsp";
+        }
+        
+        
+//        response.sendRedirect(destination);
+        
+    }
+
+    
+}
