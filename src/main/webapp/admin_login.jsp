@@ -1,3 +1,12 @@
+<%@ page language="java" %>
+<%@ page import="java.util.*" %>
+<%@ page import="beans.*" %>
+<%@ page import="database.*" %>
+<%@ page import="issuebooks.*" %>
+<%@ page import="validate.*" %>
+<%@ page import="servlet.*" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
