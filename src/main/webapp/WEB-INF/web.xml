@@ -4,25 +4,29 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ShowAllBooks</servlet-name>
-        <servlet-class>servlets.ShowAllBooks</servlet-class>
+        <servlet-name>MyServlet</servlet-name>
+        <servlet-class>nitinPersonalPractice.MyServlet</servlet-class>
     </servlet>
-   
+    <servlet>
+        <servlet-name>IssueBooks</servlet-name>
+        <servlet-class>servlets.IssueBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AfterIssueBook</servlet-name>
+        <servlet-class>servlets.AfterIssueBook</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>ShowAllBooks</servlet-name>
-        <url-pattern>/ShowAllBooks</url-pattern>
+        <servlet-name>MyServlet</servlet-name>
+        <url-pattern>/MyServlet</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AddBook</servlet-name>
-        <servlet-class>servlets.AddBook</servket-class>
-    </servlet>
-    
     <servlet-mapping>
-        <servlet-name>AddBook</servlet-name>
-        <servlet-class>/AddBook</servlet-class>
+        <servlet-name>IssueBooks</servlet-name>
+        <url-pattern>/IssueBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AfterIssueBook</servlet-name>
+        <url-pattern>/AfterIssueBook</url-pattern>
     </servlet-mapping>
 </web-app>
-

@@ -29,8 +29,7 @@
             <td>${book.publisher}</td>
             <td>${book.description}</td>
             <td><c:choose>
-                
-                    <c:when test="${book.available eq ''}">Available</c:when>
+                 <c:when test="${book.available eq ''}">Available</c:when>
                     <c:otherwise>${book.available}</c:otherwise>
                 </c:choose> 
             </td>

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Administrator
  */
-public class ShowAllBooks extends HttpServlet {
+public class IssueBooks extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,41 +34,40 @@ public class ShowAllBooks extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * 
      */
     
     
     @Override
     public void init(ServletConfig config)
             throws ServletException {
-        try {
-            new UseDB();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
-        }
         super.init(config); //To change body of generated methods, choose Tools | Templates.
+        try {
+            UseDB db = new UseDB();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(IssueBooks.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(IssueBooks.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
+    @Override
+    public void init() throws ServletException {
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-      
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-              ArrayList<Book> availableBooks = UseDB.getBooks();
-              
-              request.setAttribute("books", availableBooks);
-//            ArrayList<Book> availableNooks
-                
-            RequestDispatcher rd=request.getRequestDispatcher("ShowAllBooks.jsp");  
+            ArrayList<Book> books = UseDB.getAvailableBooks();
+            
+            request.setAttribute("booksAvailable", books);
+            
+            RequestDispatcher rd=request.getRequestDispatcher("issueBook.jsp");  
             //servlet2 is the url-pattern of the second servlet  
   
             rd.forward(request, response);//method may be include or forward  
-
-
         }
     }
 
@@ -84,11 +83,7 @@ public class ShowAllBooks extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -102,11 +97,7 @@ public class ShowAllBooks extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -3,12 +3,13 @@ package servlets;
 import beans.*;
 import com.mysql.cj.Session;
 import database.*;
-import issuebooks.*;
+
 import static java.awt.Color.green;
 import validate.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +51,7 @@ public class RegistrationServlet extends HttpServlet {
             
             if( result=="false" )
             {
-                String[] booksIssued = null;
+                ArrayList<String> booksIssued = new ArrayList<String>();
                 User user;
                 user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
                 
