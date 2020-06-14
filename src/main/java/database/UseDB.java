@@ -8,6 +8,7 @@ package database;
 import java.sql.*;
 import beans.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -114,6 +115,7 @@ public class UseDB {
         }
         
     }
+    
     public static User getUser(String username, String password){
     
         try{
@@ -127,17 +129,22 @@ public class UseDB {
             
             ResultSet rs = pstate.executeQuery();
             
-            String[] bookSplit = rs.getString("booksIssued").split(",");
+            User user = null;
+            
+            if(rs.next()){
+                String[] bookSplit = rs.getString("booksIssued").split(",");
             
             
-            User user = new User(rs.getString("username"),
-            rs.getString("password"),
-            rs.getString("email"),
-            rs.getString("firstName"),
-            rs.getString("lastName"),
-            rs.getString("imagePath"), bookSplit);
-          
-            return user;
+                ArrayList<String> bookSplitList = (ArrayList<String>) Arrays.asList(bookSplit);
+                
+                user = new User(rs.getString(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getString(5),
+                rs.getString(6), bookSplitList);
+            }
+             return user;
         }
         catch(Exception e){
             System.out.println("getUser exception caught"); 
@@ -160,13 +167,18 @@ public class UseDB {
             pstate.setString(2, password);
             
             ResultSet rs = pstate.executeQuery();
-                        
-            Admin admin = new Admin(rs.getString("username"),
-            rs.getString("password"),
-            rs.getString("email"),
-            rs.getString("firstName"),
-            rs.getString("lastName"),
-            rs.getString("imagePath"));
+            
+            Admin admin = null;
+            
+            if(rs.next()){
+                admin = new Admin(rs.getString("username"),
+                rs.getString("password"),
+                rs.getString("email"),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getString("imagePath"));
+            }
+            
           
             return admin;
         }
@@ -190,15 +202,20 @@ public class UseDB {
             
             ResultSet rs = pstate.executeQuery();
             
-            Book book = new Book(rs.getString("bookId"),
-            rs.getString("bookName"),
-            rs.getString("category"),
-            rs.getString("author"),
-            rs.getString("publisher"),
-            rs.getString("description"),
-            rs.getString("imagePath"),
-            rs.getString("available"));
+            Book book = null;
             
+            if(rs.next())
+            {
+                book = new Book(rs.getString("bookId"),
+                rs.getString("bookName"),
+                rs.getString("category"),
+                rs.getString("author"),
+                rs.getString("publisher"),
+                rs.getString("description"),
+                rs.getString("imagePath"),
+                rs.getString("available"));
+            }
+ 
             return book;
         }
         
@@ -213,7 +230,7 @@ public class UseDB {
         try{
             
             final String query = "INSERT INTO User VALUES(?, ?, ?,"
-                    + "?, ?, ?, ?";
+                    + "?, ?, ?, ?)";
             
             PreparedStatement pstate = connect.prepareStatement(query);
             
@@ -239,7 +256,7 @@ public class UseDB {
         try{
             
             final String query = "INSERT INTO Admin VALUES(?, ?, ?,"
-                    + "?, ?, ?";
+                    + "?, ?, ?)";
             
             PreparedStatement pstate = connect.prepareStatement(query);
             
@@ -265,7 +282,7 @@ public class UseDB {
         try{
             
             final String query = "INSERT INTO Book VALUES(?,?,?,"
-                    + "?, ?, ?, ?, ?";
+                    + "?, ?, ?, ?, ?)";
             
             PreparedStatement pstate = connect.prepareStatement(query);
             
@@ -297,20 +314,23 @@ public class UseDB {
             
             ResultSet rs = pstate.executeQuery();
             
-            String available = rs.getString("Available");
-            
-            if(available.length() == 0){
-                final String removeQuery = "DELETE FROM Book WHERE bookId = ?";
-                pstate = connect.prepareStatement(removeQuery);
-                pstate.setString(1, bookId);
+            if(rs.next()){
                 
-                pstate.executeUpdate();
-                return true;
+                String available = rs.getString("Available");
+            
+                if(available.length() == 0){
+                    final String removeQuery = "DELETE FROM Book WHERE bookId = ?";
+                    pstate = connect.prepareStatement(removeQuery);
+                    pstate.setString(1, bookId);
+                
+                    pstate.executeUpdate();
+                    return true;
+                }
+                return false;
             }
-            
+   
             return false;
-            
-            
+   
         }
         catch(Exception e){
             System.out.println("removeBook exception caught");
@@ -369,6 +389,9 @@ public class UseDB {
     
     public static boolean setAvailable(String bookId, String username){
         
+        //book table change, available column of bookId will change to username
+        //pass empty string to username to set available
+        //pass username to make sure that person has taken the book
         try{
             
             final String query = "SELECT * FROM Book WHERE bookId = ?";
@@ -401,7 +424,7 @@ public class UseDB {
         }
     }
     
-    public static boolean setAvailableList(String username, String[] bookId){
+    public static boolean setAvailableList(String username, ArrayList<String> bookId){
         
         try{
             
@@ -419,20 +442,23 @@ public class UseDB {
                 ps = connect.prepareStatement(bookIssueinUser);
                 
                 String bookIssued;
-                if(bookId.length == 0)
+                
+                if(bookId.size() == 0)
                     bookIssued = ",";
                 else{
                     bookIssued = "";
-                    for(int i = 0; i< bookId.length; i++)
+                    for(int i = 0; i< bookId.size(); i++)
                     {
-                        bookIssued = bookId[i] + ",";
+                        bookIssued = bookId.get(i) + ",";
                     } 
                 }
                 ps.setString(1, bookIssued);
+                ps.setString(2, username);
+                
                 ps.executeUpdate();
                 
-                for(int i = 0; i< bookId.length; i++){
-                    setAvailable(bookId[i], username);
+                for(int i = 0; i< bookId.size(); i++){
+                    setAvailable(bookId.get(i), username);
                 }
                 return true;
             }
@@ -448,8 +474,7 @@ public class UseDB {
     
     public static ArrayList<Book> getBooks(){
         
-        ArrayList<Book> bookArr = new ArrayList<Book>();
-        
+        ArrayList<Book> bookArr = null;
         try{
             final String query = "SELECT * FROM Book";
             
@@ -457,7 +482,7 @@ public class UseDB {
             
             ResultSet rs = state.executeQuery(query);
             
-            
+            bookArr = new ArrayList<Book>();
                     
             while(rs.next()){
                 bookArr.add(new Book( rs.getString(1), rs.getString(2),
@@ -472,6 +497,7 @@ public class UseDB {
             System.out.println("getBooks exception caught");
             return null;
         }
+        
         
      
     }
@@ -549,8 +575,10 @@ public class UseDB {
                 String[] bookIssued;
                 bookIssued = rs.getString("booksIssued").split(",");
                 
+                ArrayList<String> bookIssuedList = (ArrayList<String>) Arrays.asList(bookIssued);
+                
                 userArr.add(new User(rs.getString(1), rs.getString(2), rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getString(6), bookIssued));
+                rs.getString(4), rs.getString(5), rs.getString(6), bookIssuedList));
                 
             }
             
@@ -590,7 +618,7 @@ public class UseDB {
         }
     }
     
-    public static boolean addIssueBooks(String username, String[] bookId){
+    public static boolean addIssueBooks(String username, ArrayList<String> bookId){
         
         try{
             final String query = "SELECT * FROM User WHERE username = ?";
@@ -603,16 +631,17 @@ public class UseDB {
             
             if(rs.next()){
                 
-                if(bookId.length > 0){
+                if(bookId.size() > 0){
                     
                     String[] bookIssued = rs.getString("booksIssued").split(",");
                     
-                    String[] netBooks = new String[bookId.length + bookIssued.length];
+                    ArrayList<String> bookIssuedList = (ArrayList<String>) Arrays.asList(bookIssued);
                     
-                    System.arraycopy(bookIssued, 0, netBooks, 0, bookIssued.length);
-                    System.arraycopy(bookId, 0, netBooks, bookIssued.length, bookId.length);
-                    
-                    setAvailableList(username, netBooks);
+                    for(int i = 0; i < bookId.size(); i++){
+                        bookIssuedList.add(bookId.get(i));
+                    }
+       
+                    setAvailableList(username, bookIssuedList);
    
                 }
                 return true;
@@ -638,16 +667,18 @@ public class UseDB {
             if(rs.next()){
                 
                 User user = getUser(username);
-                String[] booksIssued = user.getBooksIssued();
-                for(int i = 0; i<booksIssued.length; i++){
-                    setNotAvailable(booksIssued[i]);
+                ArrayList<String> booksIssued = user.getBooksIssued();
+                
+                for(int i = 0; i<booksIssued.size(); i++){
+                    setAvailable(booksIssued.get(i), "");
                 }
                 
                 final String query2 = "UPDATE User SET booksIssued = ? WHERE username = ?";
                 
                 ps = connect.prepareStatement(query2);
                 
-                ps.setString(1, "");
+                ps.setString(1, ",");
+                ps.setString(2, username);
                 
                 ps.executeUpdate();
             }

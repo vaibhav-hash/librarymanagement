@@ -19,6 +19,16 @@ and open the template in the editor.
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>issueBook</servlet-name>
-        <url-pattern>/issueBook</url-pattern>
+        <url-pattern>/issuezBook</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name> AddBook</servlet-name>
+        <servlet-class> servlets.AddBook</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name> AddBook</servlet-name>
+        <url-pattern>/AddBook</url-pattern>
     </servlet-mapping>
 </web-app>
