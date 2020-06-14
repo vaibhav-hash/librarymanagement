@@ -9,6 +9,7 @@ import validate.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +33,7 @@ public class RegistrationServlet extends HttpServlet {
         
         String destination = "";
         HttpSession session = request.getSession();
+        User user = new User();
         
         try
         {    
@@ -50,9 +52,16 @@ public class RegistrationServlet extends HttpServlet {
             
             if( result=="false" )
             {
-                String[] booksIssued = null;
-                User user;
-                user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
+                ArrayList<String> booksIssued = new ArrayList<String>();
+//                User user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
+//                User user = new User();
+                user.setUserName(uname);
+                user.setPassword(password);
+                user.setFirstName(fname);
+                user.setLastName(lname);
+                user.setEmail(email);
+                user.setImagePath("image_folder/user_profile");
+//                user.setBooksIssued(booksIssued);
                 
                 db.addUser(user);
                 

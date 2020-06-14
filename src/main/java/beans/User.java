@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 package beans;
-
+import  servlets.*;
 import java.util.*;
 
-/**
- *
- * @author Administrator
- */
+
+import database.*;
+import issuebooks.*;
+import static java.awt.Color.green;
+import validate.*;
+
+
 public class User extends Person{
     
     private ArrayList<String> booksIssued;
@@ -32,6 +35,6 @@ public class User extends Person{
     public void setBooksIssued(ArrayList<String> booksIssued) {
         this.booksIssued = booksIssued;
     }
-    
-    
+   
+     
 }

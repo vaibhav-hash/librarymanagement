@@ -244,25 +244,42 @@ public class UseDB {
             ResultSet rs2 = pstate2.executeQuery();
             
             
-            if(rs1==null && rs2==null )
+//            if(rs1.next()==false && rs2.next()==false )
+//            {
+//                System.out.println("everything null");
+//                return "false";
+//                
+//            }
+//            else 
+//            {                
+//                rs1.beforeFirst();
+//                rs2.beforeFirst();
+//                
+//                if( rs1.next()==true )
+//                {
+//                    return "Username";
+//                }
+//                else
+//                {    
+//                    System.out.println(uname + " " + rs1.getString("userName"));
+//                    return "Email";
+//                }
+//                
+//            }
+            
+            if( rs1.next()==true )
             {
-                System.out.println("everything null");
-                return "false";
-                
-            }
-            else if( rs1!=null )
-            {
-                System.out.println(uname + " " + rs1.getString("userName"));
                 return "Username";
+            }
+            else if ( rs2.next()==true )
+            {
+                return "Email";
             }
             else
             {
-                System.out.println(email + " " + rs2.getString("email"));
-                return "Email";
+                return "false";
             }
-                      
-           
-               
+                                                           
         }
         catch(Exception e){
             System.out.println("isUserRepeated exception " + e.getMessage());
