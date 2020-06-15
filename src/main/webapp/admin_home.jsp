@@ -112,14 +112,7 @@
     <!--SideNav Finished-->
     <div class="content">
         <div class="row">
-           <v:forEach var="book" items="${books}" >
-        <tr>
-            <td>${book.bookId}</td>
-            <td>${book.bookName}</td>
-            <td>${book.category}</td>
-            <td>${book.author}</td>
-            <td>${book.publisher}</td>
-            <td>${book.description}</td>     
+           <v:forEach var="book" items="${books}" >    
             <div class="col s12 l4 m4">
                 <div class="card">
                     <div class="card-image">
@@ -152,7 +145,7 @@
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>Availbility:${book.available}<a href="#!" class="secondary-content"><i
+                                <div>publisher:${book.publisher}<a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
@@ -162,7 +155,6 @@
                 </div>
             </div>
                             </v:forEach>
-                        </v:if>
         </div>
     </div>
     <!-- 
