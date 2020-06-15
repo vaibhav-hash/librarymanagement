@@ -2,9 +2,9 @@
 <%@ page import="java.util.*" %>
 <%@ page import="beans.*" %>
 <%@ page import="database.*" %>
-<%@ page import="issuebooks.*" %>
+
 <%@ page import="validate.*" %>
-<%@ page import="servlet.*" %>
+<%@ page import="servlets.*" %>
 
 <!DOCTYPE html>
 <html>

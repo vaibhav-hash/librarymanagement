@@ -122,7 +122,7 @@
     <div class="content">
         <div class="row">
             <div class="col s12 l4 m4">
-                <c:forEach var="book" items="${books}" varStatus="bookCount">
+                <c:forEach var="book" items="${books}">
                     <div class="card">
                         <div class="card-image">
                             <img src='image_folder/book.jpg' />
