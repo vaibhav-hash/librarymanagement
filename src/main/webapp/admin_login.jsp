@@ -4,16 +4,20 @@
 <%@ page import="database.*" %>
 <%@ page import="issuebooks.*" %>
 <%@ page import="validate.*" %>
-<%@ page import="servlet.*" %>
+<%@ page import="servlets.*" %>
+<%@ page import="filters.*" %>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Animated Login Form</title>
+	<title>Library Management System</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -24,7 +28,7 @@
 		</div>
 		<div class="login-content">
 			<!-- <h2 class="title">Welcome</h2> -->
-			<form action="user_login.html" id="adminloginform">
+			<form  action="${pageContext.request.contextPath}/AdminLogin" id="adminloginform"  method="POST" onsubmit="return button()">
 				<img src="image_folder/admin_admin.jpg">
 				<h2 class="title">Welcome Library Web System</h2>
 				<h3 class="title">ADMIN LOGIN</h3>				
@@ -36,7 +40,7 @@
            		   </div>
            		   <div class="div">
            		   		<h5>Username</h5>
-           		   		<input type="text" class="input" id="uname" name="uname" >
+           		   		<input type="text" class="input" id="uname" name="uname" form="adminloginform" >
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -45,29 +49,34 @@
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" class="input" name="password" id="password">
+           		    	<input type="password" class="input" name="password" id="password" form="adminloginform">
             	   </div>
             	</div>
             	<!-- <a href="#">Forgot Password?</a> -->
                 <div id="error_message_login"></div>
-				<input type="submit" class="btn" value="Login">
+				<input type="submit" class="btn" id="adminSubmit" value="Login" onclick="button()" >
+                                
+                    
 				<a href="user_login.jsp" >
-					<input type="button" class="btn" value="User Login" onclick="trial.html">
+					<input type="button" class="btn" value="User Login" >
 				</a>
-
-            </form>
+                    </form>
+                
         </div>
     </div>
-    <script type="text/javascript" src="js/main.js"></script>
+
 </body>
 </html>
 
 
 
 
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
 <script>
-
+       
 const inputs = document.querySelectorAll(".input");
 
 
@@ -78,7 +87,7 @@ function addcl(){
 
 function remcl(){
 	let parent = this.parentNode.parentNode;
-	if(this.value == ""){
+	if(this.value === ""){
 		parent.classList.remove("focus");
 	}
 }
@@ -100,17 +109,18 @@ function register()
 	z.style.left = "110px";
 }
 
-function login()
-{
-	x.style.left = "50px";
-	y.style.left = "450px";
-	z.style.left = "110px";
-}
-
+//function login()
+//{
+//	x.style.left = "50px";
+//	y.style.left = "450px";
+//	z.style.left = "110px";
+//}
+//
+//
 //function admin_login()
 //{
-//    var unameF = document.getElementById("uname_l").value;
-//    var password = document.getElementById("password_l").value;
+//    var unameF = document.getElementById("uname").value;
+//    var password = document.getElementById("password").value;
 //
 //    var error = document.getElementById("error_message_login");
 //
@@ -133,6 +143,70 @@ function login()
 //        return true;
 //    }
 //}
+
+
+
+        
+function button()
+{
+        var uname = document.getElementById("uname").value;
+        var password = document.getElementById("password").value;
+        
+        if( uname.length < 3 || password.length < 3)
+        {
+            document.getElementById("error_message_login").style.backgroundColor ='#ffcccb';
+            $.ajax({url: "admin_message.txt", success: function(result){
+            $("#error_message_login").html(result);
+            }});
+        
+            return false;
+        }
+        else
+        {
+            document.getElementById("error_message_login").style.backgroundColor = '#90EE90';
+            $.ajax({url: "admin_message_positive.txt", success: function(result){
+            $("#error_message_login").html(result);
+            }});
+            
+            return true;
+        }
+//        else
+//        $.ajax({
+//            type : "POST",
+//            url : "${pageContext.request.contextPath}/AdminLogin",           
+//            data : {uname:uname,password:password},
+//            
+//            success : function(data){
+//                alert("success");
+//            },
+//            error : function(e){
+//                alert("fail");
+//            }
+//        });
+        
+    
+}
+
+//function loadDoc() {
+//    
+//  var uname = $('uname').val();
+//  var password = $('password').val;
+//  
+//  if( uname.length > 2 && password > 2)
+//  {
+//  var xhttp = new XMLHttpRequest();
+//  xhttp.onreadystatechange = function() {
+//    if (this.readyState == 4 && this.status == 200) {
+//      document.getElementById("demo").innerHTML = this.responseText;
+//    }
+//  };
+//  xhttp.open("POST", "/AdminLogin", true);
+//  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//  xhttp.send("uname="+uname+"&password="+password);
+//  
+//   }
+//}
+
 
 	
 </script>

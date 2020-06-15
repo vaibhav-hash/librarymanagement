@@ -5,34 +5,81 @@
  */
 package servlets;
 
+
+import beans.*;
+import com.mysql.cj.Session;
+import database.*;
+import issuebooks.*;
+import static java.awt.Color.green;
+import validate.*;
+import filters.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ayush
  */
-@WebServlet(name = "UserLogin", urlPatterns = {"/UserLogin"})
+@WebServlet(name = "UserLogin", urlPatterns = {"/UserLogin","/librarymanagement/UserLogin","/librarymanagement3/UserLogin"})
 public class UserLoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    String destination = "";
+    String message1 = "";
+    String message2 = "";
+    String color = "red";
+   
+    
+    public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String uname = request.getParameter("uname").toString();
+        String password = request.getParameter("password").toString();
+        
+        HttpSession session = request.getSession();
+        
+        try {
+            UseDB db = new UseDB();
+            User user = db.getUser(uname,password);
+            
+            if( user!=null )
+            {
+                session.setAttribute("user", user);
+                message1 = "Login Successfull " + user.getFirstName() + " " + user.getLastName();
+                message2 = "Redirecting To User Home Page...";
+                destination = "/librarymanagement/UserHomePage";
+                color = "green";
+            }
+            else
+            {
+                message1 = "Login Failed Invalid Username OR Password  ";
+                message2 = "Redirecting to Login-User Page...";
+                destination = "/librarymanagement/user_login.jsp";
+                color = "red";
+            }
+            
+        } catch (Exception ex) 
+        {
+            Logger.getLogger(UserLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            message1 = "Server OR Database Problems " + ex.getMessage();
+            message2 = "Redirect to Login-User Page...";
+            destination = "/librarymanagement/user_login.jsp";
+            color = "red";
+        }    
+        
+        response.setHeader("Refresh", "5; URL="+destination);
+        
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+            PrintWriter out = response.getWriter();
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -40,49 +87,22 @@ public class UserLoginServlet extends HttpServlet {
             out.println("<title>Servlet UserLogin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserLogin at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
+            
+            if( color=="red" )
+            {
+                out.println("<br><h1 style=\"color:red;\" >" + message1 + "</h1><br>");
+                out.println("<h1 style=\"color:red;\" >" + message2 + "</h1>");
+            }
+            else
+            {
+                out.println("<br><h1 style=\"color:green;\"> " + message1 + "</h1><br>");
+                out.println("<h1 style=\"color:green;\"> " + message2 + "</h1>");
+            }
+            out.println("</body>");            
             out.println("</html>");
-        }
+                   
+    
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    
 
 }
