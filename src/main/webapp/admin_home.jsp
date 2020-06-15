@@ -81,7 +81,7 @@
             <a href=""><i class="material-icons blue-text">add_box</i>AddBooks </a>
         </li>
         <li>
-            <a href=""><i class="material-icons blue-text">rate_review</i>See Books
+            <a href="ShowAllBooks"><i class="material-icons blue-text">rate_review</i>See Books
             </a>
         </li>
         <li>
@@ -106,6 +106,8 @@
     </ul>
 
     <!--SideNav Finished-->
+    
+   
     <div class="content">
         <div class="row">
             <div class="col s12 l4 m4">
