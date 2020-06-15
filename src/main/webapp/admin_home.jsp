@@ -125,32 +125,32 @@
                                 <h4>BOOK Information</h4>
                             </li>
                             <li class="collection-item">
-                                <div>bookId:${book.bookId}<a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">bookId:  </b><b>${book.bookId}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>bookName:${book.bookName}<a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">bookName:  </b><b>${book.bookName}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>Category:${book.category}<a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">category:  </b><b>${book.category}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>Author:${book.author}<a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">Author: </b><b>${book.author}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>publisher:${book.publisher}<a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">publisher:</b><b>${book.publisher}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                         </ul>
-                        <p style="margin-left: 5px;">Description:</p>
+<!--                        <p style="margin-left: 5px;">Description:</p>-->
                     </div>
                 </div>
             </div>
