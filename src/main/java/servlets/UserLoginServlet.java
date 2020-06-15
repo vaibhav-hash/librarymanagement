@@ -9,7 +9,6 @@ package servlets;
 import beans.*;
 import com.mysql.cj.Session;
 import database.*;
-import issuebooks.*;
 import static java.awt.Color.green;
 import validate.*;
 import filters.*;
@@ -42,12 +41,14 @@ public class UserLoginServlet extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String uname = request.getParameter("uname").toString();
-        String password = request.getParameter("password").toString();
+        
         
         HttpSession session = request.getSession();
         
         try {
+            
+            String uname = request.getParameter("uname").toString();
+            String password = request.getParameter("password").toString();
             UseDB db = new UseDB();
             User user = db.getUser(uname,password);
             
@@ -67,16 +68,7 @@ public class UserLoginServlet extends HttpServlet {
                 color = "red";
             }
             
-        } catch (Exception ex) 
-        {
-            Logger.getLogger(UserLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            message1 = "Server OR Database Problems " + ex.getMessage();
-            message2 = "Redirect to Login-User Page...";
-            destination = "/librarymanagement/user_login.jsp";
-            color = "red";
-        }    
-        
-        response.setHeader("Refresh", "5; URL="+destination);
+            response.setHeader("Refresh", "5; URL="+destination);
         
         response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -100,6 +92,19 @@ public class UserLoginServlet extends HttpServlet {
             }
             out.println("</body>");            
             out.println("</html>");
+            
+            
+        } catch (Exception ex) 
+        {
+            System.out.println("UserLoginServlet " + ex.getMessage());
+            message1 = "Server OR Database Problems " + ex.getMessage();
+            message2 = "Redirect to Login-User Page...";
+            destination = "/librarymanagement/user_login.jsp";
+            color = "red";
+            response.sendRedirect("/librarymanagement/user_login.jsp");
+        }    
+        
+        
                    
     
     }

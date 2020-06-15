@@ -9,7 +9,6 @@ package servlets;
 import beans.*;
 import com.mysql.cj.Session;
 import database.*;
-import issuebooks.*;
 import static java.awt.Color.green;
 import validate.*;
 import filters.*;
@@ -40,11 +39,13 @@ public class AdminLoginServlet extends HttpServlet {
         String color = "red";
         HttpSession session = request.getSession();
         
-        String uname = request.getParameter("uname");
-        String password = request.getParameter("password");
         
         try
         {
+        
+            String uname = request.getParameter("uname");
+            String password = request.getParameter("password");
+        
             UseDB db = new UseDB();
             Admin admin = db.getAdmin(uname,password);
             
@@ -54,7 +55,7 @@ public class AdminLoginServlet extends HttpServlet {
                 message2 = "Redirecting to ADMIN Home Page...";
                 color = "green";
                 session.setAttribute("admin",admin);
-                destination = "/librarymanagement//Admin_Home";
+                destination = "/librarymanagement/Admin_Home";
                 
             }
             else
@@ -65,17 +66,10 @@ public class AdminLoginServlet extends HttpServlet {
                 destination = "/librarymanagement/admin_login.jsp";
             }
             
-        }
-        catch(Exception e)
-        {
-            message1 = "Login Failed Server OR Database error ";
-            message2 = "Redirecting to ADMIN Login Page";
-        }
+            response.setHeader("Refresh", "5; URL="+destination);
         
-        response.setHeader("Refresh", "5; URL="+destination);
-        
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -95,6 +89,17 @@ public class AdminLoginServlet extends HttpServlet {
             }
             out.println("</body>");
             out.println("</html>");
+            
+        }
+        catch(Exception e)
+        {
+            message1 = "Login Failed Server OR Database error ";
+            message2 = "Redirecting to ADMIN Login Page";
+            System.out.println("Admin Login Servlet " + e.getMessage());
+            response.sendRedirect(destination);
+        }
+        
+        
         
     }
 
