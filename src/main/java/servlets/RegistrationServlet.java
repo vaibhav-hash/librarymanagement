@@ -3,7 +3,7 @@ package servlets;
 import beans.*;
 import com.mysql.cj.Session;
 import database.*;
-import issuebooks.*;
+
 import static java.awt.Color.green;
 import validate.*;
 import filters.*;
@@ -63,6 +63,7 @@ public class RegistrationServlet extends HttpServlet implements Filter {
             if( result=="false" )
             {
                 ArrayList<String> booksIssued = new ArrayList<String>();
+
 //                User user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
 //                User user = new User();
                 user.setUserName(uname);
@@ -72,6 +73,7 @@ public class RegistrationServlet extends HttpServlet implements Filter {
                 user.setEmail(email);
                 user.setImagePath("image_folder/user_profile");
 //                user.setBooksIssued(booksIssued);
+
                 
                 db.addUser(user);
                 

@@ -10,26 +10,32 @@ and open the template in the editor.
         <servlet-class>nitinPersonalPractice.MyServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>issueBook</servlet-name>
-        <servlet-class>issuebooks.issueBook</servlet-class>
+        <servlet-name>IssueBooks</servlet-name>
+        <servlet-class>servlets.IssueBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AfterIssueBook</servlet-name>
+        <servlet-class>servlets.AfterIssueBook</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_Home</servlet-name>
+        <servlet-class>servlets.Admin_Home</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>issueBook</servlet-name>
-        <url-pattern>/issuezBook</url-pattern>
+        <servlet-name>IssueBooks</servlet-name>
+        <url-pattern>/IssueBooks</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name> AddBook</servlet-name>
-        <servlet-class> servlets.AddBook</servlet-class>
-    </servlet>
-    
     <servlet-mapping>
-        <servlet-name> AddBook</servlet-name>
-        <url-pattern>/AddBook</url-pattern>
+        <servlet-name>AfterIssueBook</servlet-name>
+        <url-pattern>/AfterIssueBook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_Home</servlet-name>
+        <url-pattern>/Admin_Home</url-pattern>
     </servlet-mapping>
     
 
