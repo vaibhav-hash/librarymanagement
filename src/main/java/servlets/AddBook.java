@@ -3,26 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package issuebooks;
+package servlets;
 
+import beans.Book;
+import beans.User;
+import database.*;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
-import beans.*;
-import database.*;
-import java.sql.*;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Administrator
  */
-public class issueBook extends HttpServlet {
+
+public class AddBook extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,22 +38,42 @@ public class issueBook extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    
+    @Override
+    public void init()
+            throws ServletException {
+        try {
+            UseDB db = new UseDB();
+        }
+        catch(Exception e){
+            System.out.println("Database connection exception");
+        }
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+  
+        String bookId = request.getParameter("bookId");
+        String bookName = request.getParameter("bookName");
+        String category = request.getParameter("category");
+        String author = request.getParameter("author");    
+        String publisher = request.getParameter("publisher");
+        String description = request.getParameter("description");
+        
+
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            UseDB connectJDBC = new UseDB();
-            Connection connect = connectJDBC.getConnection();
-            
-            Statement state = connect.createStatement();
-         
-            
-            
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(issueBook.class.getName()).log(Level.SEVERE, null, ex);
+//               String filePath = savePath + File.separator + filename;
+               
+               Book book = new Book(bookId, bookName, category, author, publisher, description, "image_folder/book.jpg" , "");
+               
+               UseDB.addBook(book);
+//            request.getParameter(string)
         }
     }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
