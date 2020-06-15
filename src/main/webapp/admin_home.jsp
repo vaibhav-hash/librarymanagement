@@ -1,3 +1,10 @@
+<%-- 
+    Document   : admin_home
+    Created on : Jun 15, 2020, 7:55:16 AM
+    Author     : Admin1
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
