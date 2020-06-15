@@ -4,14 +4,7 @@
  * and open the template in the editor.
  */
 package beans;
-import  servlets.*;
-import java.util.*;
-
-
-import database.*;
-import issuebooks.*;
-import static java.awt.Color.green;
-import validate.*;
+import  java.util.*;
 
 
 public class User extends Person{

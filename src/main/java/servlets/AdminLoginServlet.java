@@ -7,13 +7,7 @@ package servlets;
 
 
 import beans.*;
-import com.mysql.cj.Session;
 import database.*;
-import issuebooks.*;
-import static java.awt.Color.green;
-import validate.*;
-import filters.*;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
