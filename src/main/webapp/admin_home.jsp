@@ -4,7 +4,11 @@
     Author     : Admin1
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="beans.Book"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="v" %>
 <!DOCTYPE html>
 <html>
 
@@ -108,6 +112,14 @@
     <!--SideNav Finished-->
     <div class="content">
         <div class="row">
+           <v:forEach var="book" items="${books}" >
+        <tr>
+            <td>${book.bookId}</td>
+            <td>${book.bookName}</td>
+            <td>${book.category}</td>
+            <td>${book.author}</td>
+            <td>${book.publisher}</td>
+            <td>${book.description}</td>     
             <div class="col s12 l4 m4">
                 <div class="card">
                     <div class="card-image">
@@ -120,27 +132,27 @@
                                 <h4>BOOK Information</h4>
                             </li>
                             <li class="collection-item">
-                                <div>BOOKID:<a href="#!" class="secondary-content"><i
+                                <div>bookId:${book.bookId}<a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
+                                <div>bookName:${book.bookName}<a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>Category<a href="#!" class="secondary-content"><i
+                                <div>Category:${book.category}<a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>Author:<a href="#!" class="secondary-content"><i
+                                <div>Author:${book.author}<a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div>Availbility:<a href="#!" class="secondary-content"><i
+                                <div>Availbility:${book.available}<a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
@@ -149,129 +161,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 l4 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="img/img1.jpg" />
-                        <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                        <ul class="collection with-header">
-                            <li class="collection-header">
-                                <h4>BOOK Information</h4>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKID:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Category<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Author:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Availbility:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                        </ul>
-                        <p style="margin-left: 5px;">Description:</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 l4 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="img/img1.jpg" />
-                        <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                        <ul class="collection with-header">
-                            <li class="collection-header">
-                                <h4>BOOK Information</h4>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKID:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Category<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Author:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Availbility:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                        </ul>
-                        <p style="margin-left: 5px;">Description:</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 l4 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="img/img1.jpg" />
-                        <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                        <ul class="collection with-header">
-                            <li class="collection-header">
-                                <h4>BOOK Information</h4>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKID:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Category<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Author:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Availbility:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                        </ul>
-                        <p style="margin-left: 5px;">Description:</p>
-                    </div>
-                </div>
-            </div>
+                            </v:forEach>
+                        </v:if>
         </div>
     </div>
     <!-- 

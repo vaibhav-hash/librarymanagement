@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -137,132 +138,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 l4 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="img/img1.jpg" />
-                        <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                        <ul class="collection with-header">
-                            <li class="collection-header">
-                                <h4>BOOK Information</h4>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKID:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Category<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Author:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Availbility:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                        </ul>
-                        <p style="margin-left: 5px;">Description:</p>
-                    </div>
-                </div>
             </div>
-            <div class="col s12 l4 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="img/img1.jpg" />
-                        <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                        <ul class="collection with-header">
-                            <li class="collection-header">
-                                <h4>BOOK Information</h4>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKID:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Category<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Author:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Availbility:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                        </ul>
-                        <p style="margin-left: 5px;">Description:</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 l4 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="img/img1.jpg" />
-                        <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                        <ul class="collection with-header">
-                            <li class="collection-header">
-                                <h4>BOOK Information</h4>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKID:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Category<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Author:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div>Availbility:<a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                        </ul>
-                        <p style="margin-left: 5px;">Description:</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
     <!-- 
     
 <div class="fixed-action-btn">
