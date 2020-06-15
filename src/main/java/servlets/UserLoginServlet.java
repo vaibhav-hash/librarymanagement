@@ -12,6 +12,7 @@ import database.*;
 import issuebooks.*;
 import static java.awt.Color.green;
 import validate.*;
+import filters.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ayush
  */
-@WebServlet(name = "UserLogin", urlPatterns = {"/UserLogin","/librarymanagemant/UserLogin","/librarymanagemant/UserLogin"})
+@WebServlet(name = "UserLogin", urlPatterns = {"/UserLogin","/librarymanagement/UserLogin","/librarymanagement3/UserLogin"})
 public class UserLoginServlet extends HttpServlet {
 
     String destination = "";
@@ -61,16 +62,18 @@ public class UserLoginServlet extends HttpServlet {
             else
             {
                 message1 = "Login Failed Invalid Username OR Password  ";
-                message2 = "Redirect to Login-User Page...";
+                message2 = "Redirecting to Login-User Page...";
                 destination = "/librarymanagement/user_login.jsp";
+                color = "red";
             }
             
         } catch (Exception ex) 
         {
             Logger.getLogger(UserLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            message1 = "Server OR Database Problems";
+            message1 = "Server OR Database Problems " + ex.getMessage();
             message2 = "Redirect to Login-User Page...";
             destination = "/librarymanagement/user_login.jsp";
+            color = "red";
         }    
         
         response.setHeader("Refresh", "5; URL="+destination);
@@ -84,16 +87,20 @@ public class UserLoginServlet extends HttpServlet {
             out.println("<title>Servlet UserLogin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" + message1 + "</h1>");
-            out.println("</body>");
+            
+            if( color=="red" )
+            {
+                out.println("<br><h1 style=\"color:red;\" >" + message1 + "</h1><br>");
+                out.println("<h1 style=\"color:red;\" >" + message2 + "</h1>");
+            }
+            else
+            {
+                out.println("<br><h1 style=\"color:green;\"> " + message1 + "</h1><br>");
+                out.println("<h1 style=\"color:green;\"> " + message2 + "</h1>");
+            }
+            out.println("</body>");            
             out.println("</html>");
-            out.println("<script>");
-            out.println("h1{");
-            out.println("color:"+color+";");
-            out.println("}");
-            out.println("</html>");
-            out.println("</script>");
-        
+                   
     
     }
     

@@ -120,7 +120,7 @@ public class UseDB {
     
         try{
           
-            final String query = "SELECT * FROM User WHERE username = ? AND password = ?";
+            final String query = "SELECT * FROM User WHERE userName = ? AND password = ?";
             
             PreparedStatement pstate = connect.prepareStatement(query);
             
@@ -132,10 +132,15 @@ public class UseDB {
             User user = null;
             
             if(rs.next()){
+//                rs.beforeFirst();
                 String[] bookSplit = rs.getString("booksIssued").split(",");
+//                ArrayList<String> bookSplitList = new ArrayList<String>;
             
-            
-                ArrayList<String> bookSplitList = (ArrayList<String>) Arrays.asList(bookSplit);
+                
+                
+                ArrayList<String> bookSplitList = new ArrayList<String>( Arrays.asList(bookSplit));
+                
+                
                 
                 user = new User(rs.getString(1),
                 rs.getString(2),
@@ -147,7 +152,7 @@ public class UseDB {
              return user;
         }
         catch(Exception e){
-            System.out.println("getUser exception caught"); 
+            System.out.println("getUser exception caught " + e.getMessage()); 
             return null;
         }
         
