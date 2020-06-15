@@ -81,7 +81,7 @@
             <a href=""><i class="material-icons blue-text">add_box</i>AddBooks </a>
         </li>
         <li>
-            <a href=""><i class="material-icons blue-text">rate_review</i>See Books
+            <a href=""><i class="material-icons blue-text">library_books</i>See Books
             </a>
         </li>
         <li>
@@ -115,11 +115,37 @@
                         <span class="card-title">Card Title</span>
                     </div>
                     <div class="card-content">
-                        <p>
-                            I am a very simple card. I am good at containing small bits of
-                            information. I am convenient because I require little markup to
-                            use effectively.
-                        </p>
+                        <ul class="collection with-header">
+                            <li class="collection-header">
+                                <h4>BOOK Information</h4>
+                            </li>
+                            <li class="collection-item">
+                                <div>BOOKID:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Category<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Author:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Availbility:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <p style="margin-left: 5px;">Description:</p>
                     </div>
                 </div>
             </div>
@@ -130,11 +156,37 @@
                         <span class="card-title">Card Title</span>
                     </div>
                     <div class="card-content">
-                        <p>
-                            I am a very simple card. I am good at containing small bits of
-                            information. I am convenient because I require little markup to
-                            use effectively.
-                        </p>
+                        <ul class="collection with-header">
+                            <li class="collection-header">
+                                <h4>BOOK Information</h4>
+                            </li>
+                            <li class="collection-item">
+                                <div>BOOKID:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Category<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Author:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Availbility:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <p style="margin-left: 5px;">Description:</p>
                     </div>
                 </div>
             </div>
@@ -145,11 +197,37 @@
                         <span class="card-title">Card Title</span>
                     </div>
                     <div class="card-content">
-                        <p>
-                            I am a very simple card. I am good at containing small bits of
-                            information. I am convenient because I require little markup to
-                            use effectively.
-                        </p>
+                        <ul class="collection with-header">
+                            <li class="collection-header">
+                                <h4>BOOK Information</h4>
+                            </li>
+                            <li class="collection-item">
+                                <div>BOOKID:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Category<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Author:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Availbility:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <p style="margin-left: 5px;">Description:</p>
                     </div>
                 </div>
             </div>
@@ -160,11 +238,37 @@
                         <span class="card-title">Card Title</span>
                     </div>
                     <div class="card-content">
-                        <p>
-                            I am a very simple card. I am good at containing small bits of
-                            information. I am convenient because I require little markup to
-                            use effectively.
-                        </p>
+                        <ul class="collection with-header">
+                            <li class="collection-header">
+                                <h4>BOOK Information</h4>
+                            </li>
+                            <li class="collection-item">
+                                <div>BOOKID:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>BOOKNAMe:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Category<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Author:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div>Availbility:<a href="#!" class="secondary-content"><i
+                                            class="material-icons">send</i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <p style="margin-left: 5px;">Description:</p>
                     </div>
                 </div>
             </div>
