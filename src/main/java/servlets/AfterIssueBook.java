@@ -53,7 +53,7 @@ public class AfterIssueBook extends HttpServlet {
             String[] names = request.getParameterValues("books");
             
             for(int i = 0; i<names.length; i++){
-                UseDB.removeBook(names[i]);
+                
             }
             
             out.println("your available books are removed");

@@ -23,7 +23,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author ayush
  */
-@WebServlet(name = "UserLogin", urlPatterns = {"/UserLogin","/librarymanagement/UserLogin","/librarymanagement3/UserLogin"})
 public class UserLoginServlet extends HttpServlet {
 
     String destination = "";
@@ -49,7 +48,7 @@ public class UserLoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 message1 = "Login Successfull " + user.getFirstName() + " " + user.getLastName();
                 message2 = "Redirecting To User Home Page...";
-                destination = "/librarymanagement/UserHomePage";
+                destination = "/librarymanagement/UserHomeBooks";
                 color = "green";
             }
             else

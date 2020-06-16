@@ -5,10 +5,10 @@
 
 <%@ page import="validate.*" %>
 <%@ page import="servlets.*" %>
-<<<<<<< HEAD
-=======
+
+
 <%@ page import="filters.*" %>
->>>>>>> e6d655bd66cc9395d6e1828d8ee8f1fea016d065
+
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@
                 <h1>Welcome Library Web System</h1><br>
                 <h2>Sign In For USERS</h2><br>
 
-                <form id="loginform" action="${pageContext.request.contextPath}/UserLogin" method="POST" onsubmit="return(login())" >
+                <form id="loginform" action="${pageContext.request.contextPath}/UserLoginServlet" method="POST" onsubmit="return(login())" >
                     <label>
                         <span>Username</span>
                         <input type="text" id="uname_l" name="uname" form="loginform" oninput="login()">
