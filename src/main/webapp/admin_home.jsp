@@ -4,11 +4,14 @@
     Author     : Admin1
 --%>
 
+<%@page import="beans.Admin"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.Book"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="v" %>
+<%@page session="true" %>
+<%@page errorPage="" %>
 <!DOCTYPE html>
 <html>
 
@@ -43,6 +46,7 @@
 </head>
 
 <body>
+    <v:if test="${session!=null}">
     <nav class="blue">
         <div class="nav wrapper">
             <div class="container" style="margin-top: 8px; margin-left: 0px; width: 30%;">
@@ -51,11 +55,17 @@
             </div>
         </div>
         <ul class="right">
-            <li><a href=""><i class="material-icons">refresh</i></a></li>
+            <li><a href="admin_home.jsp"><i class="material-icons">refresh</i></a></li>
             <li><a href=""><i class="material-icons">more_vert</i></a></li>
         </ul>
         </div>
     </nav>
+        <% Admin admin=(Admin)((session.getAttribute("admin")));
+                String userName=admin.getUserName().toString();
+                String name=admin.getFirstName().toString()+admin.getLastName().toString();
+                String email=admin.getEmail().toString();
+        
+                %>
     <ul class=" side-nav fixed" id="sidenav">
         <li>
             <!-- <div class="user-view"> -->
@@ -73,12 +83,12 @@
         </li>
 
         <li>
-            <a href="" class="tooltipped" data-position="top" data-tooltip=""><i
-                    class="material-icons blue-text">person</i>Admin_name
+            <a href="" class="tooltipped" data-position="top" data-tooltip="<%= userName %>"><i
+                    class="material-icons blue-text">person</i><%= name %>
             </a>
         </li>
         <li>
-            <a href=""><i class="material-icons blue-text">email</i>email </a>
+            <a href=""><i class="material-icons blue-text">email</i> <%= email %></a>
         </li>
         <li>
             <a href=""><i class="material-icons blue-text">add_box</i>AddBooks </a>
@@ -184,6 +194,11 @@
             console.log("fnjdnjksdkf");
         }
     </script>
+    </v:if>
+    <v:if test="${session==null}">
+        <%
+            response.sendRedirect("InvalidAdmin.jsp");
+            %>
+    </v:if>
 </body>
-
 </html>
