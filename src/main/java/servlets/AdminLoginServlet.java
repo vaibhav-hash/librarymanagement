@@ -7,11 +7,8 @@ package servlets;
 
 
 import beans.*;
-import com.mysql.cj.Session;
 import database.*;
-import static java.awt.Color.green;
-import validate.*;
-import filters.*;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -55,7 +52,8 @@ public class AdminLoginServlet extends HttpServlet {
                 message2 = "Redirecting to ADMIN Home Page...";
                 color = "green";
                 session.setAttribute("admin",admin);
-                destination = "/librarymanagement/Admin_Home";
+
+                destination = "/librarymanagement/AdminHomeBooks";
                 
             }
             else

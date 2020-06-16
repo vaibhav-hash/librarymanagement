@@ -7,15 +7,10 @@ package servlets;
 
 
 import beans.*;
-import com.mysql.cj.Session;
 import database.*;
-import static java.awt.Color.green;
-import validate.*;
-import filters.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -29,7 +24,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author ayush
  */
-@WebServlet(name = "UserLogin", urlPatterns = {"/UserLogin","/librarymanagement/UserLogin","/librarymanagement3/UserLogin"})
 public class UserLoginServlet extends HttpServlet {
 
     String destination = "";
@@ -57,7 +51,7 @@ public class UserLoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 message1 = "Login Successfull " + user.getFirstName() + " " + user.getLastName();
                 message2 = "Redirecting To User Home Page...";
-                destination = "/librarymanagement/UserHomePage";
+                destination = "/librarymanagement/UserHomeBooks";
                 color = "green";
             }
             else

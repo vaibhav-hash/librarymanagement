@@ -5,8 +5,8 @@
  */
 package database;
 
-import java.sql.*;
 import beans.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ public class UseDB {
     public UseDB() throws ClassNotFoundException, SQLException
     {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connect = DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12346922", "sql12346922" , "E3T8PQ26Yn");
+        connect = DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12348849", "sql12348849" , "QcE4YwhgTw");
         createBookTable();
         createUserTable();
         createAdminTable();
