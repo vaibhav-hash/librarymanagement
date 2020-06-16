@@ -87,7 +87,7 @@
             <a href=""><i class="material-icons blue-text">book</i>IssueBook </a>
         </li>
         <li>
-            <a href=""><i class="material-icons blue-text">rate_review</i>See Books
+            <a href="ShowIsuedBooks"><i class="material-icons blue-text">rate_review</i>See Books
             </a>
         </li>
         <li>

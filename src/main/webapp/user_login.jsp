@@ -2,7 +2,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="beans.*" %>
 <%@ page import="database.*" %>
-
 <%@ page import="validate.*" %>
 <%@ page import="servlets.*" %>
 

@@ -1,4 +1,5 @@
 
+
 package servlets;
 import beans.*;
 import com.mysql.cj.Session;
@@ -54,114 +55,115 @@ public class RegistrationServlet extends HttpServlet implements Filter {
         
         
         
-    if( request!=null )    
-    {    
-        String destination = "";
-        HttpSession session = request.getSession();
-        User user = new User();
-        String uname = request.getParameter("uname");
-        String password = request.getParameter("password");
-        
-        try
+        if( request!=null )    
         {    
-            String fname = request.getParameter("fname");
-            String lname = request.getParameter("lname");            
-            String email = request.getParameter("email");
-                       
+            String destination = "";
+            HttpSession session = request.getSession();
+            User user = new User();
+            String uname = request.getParameter("uname");
+            String password = request.getParameter("password");
 
-            String result = UseDB.isUserRepeated(uname,email);
-            String message1 = " ";
-            String message2 = " ";
-            String color = "";
-            
-            if( "false".equals(result) )
-            {
-                ArrayList<String> booksIssued = new ArrayList<String>();
+            try
+            {    
+                String fname = request.getParameter("fname");
+                String lname = request.getParameter("lname");            
+                String email = request.getParameter("email");
 
-                user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
-  
-                UseDB.addUser(user);
-                
-                session.setAttribute("user", user);  
-                
-                message1 = "Congrats " + fname + " " + lname + 
-                        " User Registration Successfull";
-                message2 =  "Redirecting to Home Page...";
-                color = "green";
-                destination = "UserHomeBooks";
-                
+
+                String result = UseDB.isUserRepeated(uname,email);
+                String message1 = " ";
+                String message2 = " ";
+                String color = "";
+
+                if( "false".equals(result) )
+                {
+                    ArrayList<String> booksIssued = new ArrayList<String>();
+
+                    user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
+
+                    UseDB.addUser(user);
+
+                    session.setAttribute("user", user);  
+
+                    message1 = "Congrats " + fname + " " + lname + 
+                            " User Registration Successfull";
+                    message2 =  "Redirecting to Home Page...";
+                    color = "green";
+                    destination = "UserHomeBooks";
+
+                }
+                else if( "error".equals(result) )
+                {
+                    message1 = "Some error occured";
+                    message2 = "Redirecting to User Login-Register Page....";
+                    destination = "/librarymanagement/user_login.jsp";
+                }
+                else
+                {
+                    message1 = result + " Already in Use - Try with another " + result; 
+                    message2 = "Redirecting to User Login-Register Page....";
+                    color = "red";
+                    destination = "/librarymanagement/user_login.jsp";
+                }
+
+
+                 RequestDispatcher rd=request.getRequestDispatcher(destination);  
+                //servlet2 is the url-pattern of the second servlet  
+
+                rd.forward(request, response); 
+
+                response.setContentType("text/html;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet RegistrationServlet</title>");  
+                out.println("</head>");
+                out.println("<body><br>");
+                out.println("<h1>" +  message1 + "</h1><br>");
+                out.println("<h1>" +  message2 + "</h1><br>");
+                out.println("</body>");
+                out.println("</html>");
+
+
+    //            response.setHeader("Refresh", "10; URL="+destination);
+
+                if( "false".equals(result))
+                {
+                    System.out.println("Going to Home Page");
+
+                }
+                else
+                {
+                    System.out.println("Going to LOgin Page");
+
+                }
             }
-            else if( "error".equals(result) )
+            catch(IOException | ServletException e)
             {
-                message1 = "Some error occured";
-                message2 = "Redirecting to User Login-Register Page....";
+                System.out.println("Error at Registration Servlet " + e.getMessage());
                 destination = "/librarymanagement/user_login.jsp";
             }
-            else
-            {
-                message1 = result + " Already in Use - Try with another " + result; 
-                message2 = "Redirecting to User Login-Register Page....";
-                color = "red";
-                destination = "/librarymanagement/user_login.jsp";
-            }
-            
-            
-             RequestDispatcher rd=request.getRequestDispatcher(destination);  
-            //servlet2 is the url-pattern of the second servlet  
-  
-            rd.forward(request, response); 
-            
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegistrationServlet</title>");  
-            out.println("</head>");
-            out.println("<body><br>");
-            out.println("<h1>" +  message1 + "</h1><br>");
-            out.println("<h1>" +  message2 + "</h1><br>");
-            out.println("</body>");
-            out.println("</html>");
-            
-        
-//            response.setHeader("Refresh", "10; URL="+destination);
 
-            if( "false".equals(result))
-            {
-                System.out.println("Going to Home Page");
-                
-            }
-            else
-            {
-                System.out.println("Going to LOgin Page");
-                
-            }
         }
-        catch(IOException | ServletException e)
+        else
         {
-            System.out.println("Error at Registration Servlet " + e.getMessage());
-            destination = "/librarymanagement/user_login.jsp";
+            response.sendRedirect("/librarymanagement/user_login.jsp");
         }
-        
-    }
-    else
-    {
-        response.sendRedirect("/librarymanagement/user_login.jsp");
-    }
-        
-    }
 
-    @Override
-    public void init(FilterConfig fc) throws ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        }
 
-    @Override
-    public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        @Override
+        public void init(FilterConfig fc) throws ServletException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
 
     
 }
+

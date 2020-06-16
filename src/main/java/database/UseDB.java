@@ -628,6 +628,35 @@ public class UseDB {
         
     }
     
+    public static ArrayList<Book> getIssuedBooks(String username){
+        
+        ArrayList<Book> bookArr = new ArrayList<Book>();
+        
+        try{
+            
+            User user = getUser(username);
+          
+            if(user!=null){
+                
+                ArrayList<String> bookIssued = user.getBooksIssued();
+                
+                for(int i = 0; i< bookIssued.size(); i++){
+                    bookArr.add(getBook(bookIssued.get(i)));
+                }
+                
+            }
+            
+          
+            return bookArr;
+            
+        }
+        catch(Exception e){
+            System.out.println("getIssuedBooks exception caught");
+            return null;
+        }
+        
+    }
+    
     public static ArrayList<User> getUsers(){
         
         ArrayList<User> userArr = new ArrayList<User>();
