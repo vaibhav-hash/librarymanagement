@@ -48,7 +48,7 @@ public class AdminLoginServlet extends HttpServlet {
                 message2 = "Redirecting to ADMIN Home Page...";
                 color = "green";
                 session.setAttribute("admin",admin);
-                destination = "/librarymanagement//Admin_Home";
+                destination = "/librarymanagement/AdminHomeBooks";
                 
             }
             else
