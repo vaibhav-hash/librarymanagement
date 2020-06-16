@@ -100,5 +100,13 @@ and open the template in the editor.
         <servlet-name>AdminLoginServlet</servlet-name>
         <url-pattern>/AdminLoginServlet</url-pattern>
     </servlet-mapping>
-    
+  
+    <servlet>
+        <servlet-name>AddBook</servlet-name>
+        <servlet-class>servlets.AddBook</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddBook</servlet-name>
+        <url-pattern>/AddBook</url-pattern>
+    </servlet-mapping>
 </web-app>
