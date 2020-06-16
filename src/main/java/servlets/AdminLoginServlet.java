@@ -56,12 +56,13 @@ public class AdminLoginServlet extends HttpServlet {
         Admin admin = UseDB.getAdmin(uname,password);
         if( admin!=null )
         {
+
             message1 = "Successfull Login " + admin.getFirstName() + " " + admin.getLastName();
             message2 = "Redirecting to ADMIN Home Page...";
             color = "green";
             session.setAttribute("admin",admin);
             destination = "AdminHomeBooks";
-            
+ 
         }
         else
         {

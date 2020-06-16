@@ -10,6 +10,7 @@ import filters.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -33,7 +35,20 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Registration", urlPatterns = {"/Registration"})
 public class RegistrationServlet extends HttpServlet implements Filter {
 
+    @Override
+    public void init() throws ServletException {
+        try {
+            UseDB db = new UseDB();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(RegistrationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+    }
 
+
+    
+    
+    @Override
     public  void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -44,38 +59,28 @@ public class RegistrationServlet extends HttpServlet implements Filter {
         String destination = "";
         HttpSession session = request.getSession();
         User user = new User();
-        String uname = request.getParameter("uname").toString();
-        String password = request.getParameter("password").toString();
+        String uname = request.getParameter("uname");
+        String password = request.getParameter("password");
         
         try
         {    
-            String fname = request.getParameter("fname").toString();
-            String lname = request.getParameter("lname").toString();            
-            String email = request.getParameter("email").toString();
+            String fname = request.getParameter("fname");
+            String lname = request.getParameter("lname");            
+            String email = request.getParameter("email");
                        
-            
-            UseDB db = new UseDB();
-            String result = db.isUserRepeated(uname,email);
+
+            String result = UseDB.isUserRepeated(uname,email);
             String message1 = " ";
             String message2 = " ";
             String color = "";
             
-            if( result=="false" )
+            if( "false".equals(result) )
             {
                 ArrayList<String> booksIssued = new ArrayList<String>();
 
-//                User user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
-//                User user = new User();
-                user.setUserName(uname);
-                user.setPassword(password);
-                user.setFirstName(fname);
-                user.setLastName(lname);
-                user.setEmail(email);
-                user.setImagePath("image_folder/user_profile");
-//                user.setBooksIssued(booksIssued);
-
-                
-                db.addUser(user);
+                user = new User(uname,password,email,fname,lname, "image_folder/user_profile", booksIssued);
+  
+                UseDB.addUser(user);
                 
                 session.setAttribute("user", user);  
                 
@@ -83,10 +88,10 @@ public class RegistrationServlet extends HttpServlet implements Filter {
                         " User Registration Successfull";
                 message2 =  "Redirecting to Home Page...";
                 color = "green";
-                destination = "/librarymanagement/UserHomePage";
+                destination = "UserHomeBooks";
                 
             }
-            else if( result=="error" )
+            else if( "error".equals(result) )
             {
                 message1 = "Some error occured";
                 message2 = "Redirecting to User Login-Register Page....";
@@ -101,9 +106,10 @@ public class RegistrationServlet extends HttpServlet implements Filter {
             }
             
             
-            response.setHeader("Refresh", "5; URL="+destination);
-            
-            
+             RequestDispatcher rd=request.getRequestDispatcher(destination);  
+            //servlet2 is the url-pattern of the second servlet  
+  
+            rd.forward(request, response); 
             
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -122,7 +128,7 @@ public class RegistrationServlet extends HttpServlet implements Filter {
         
 //            response.setHeader("Refresh", "10; URL="+destination);
 
-            if( result=="false")
+            if( "false".equals(result))
             {
                 System.out.println("Going to Home Page");
                 
@@ -133,7 +139,7 @@ public class RegistrationServlet extends HttpServlet implements Filter {
                 
             }
         }
-        catch(Exception e)
+        catch(IOException | ServletException e)
         {
             System.out.println("Error at Registration Servlet " + e.getMessage());
             destination = "/librarymanagement/user_login.jsp";
