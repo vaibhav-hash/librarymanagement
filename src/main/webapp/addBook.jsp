@@ -91,18 +91,18 @@
             <a href=""><i class="material-icons blue-text">email</i> <%= email %></a>
         </li>
         <li>
-            <a href="addBook.jsp"><i class="material-icons blue-text">add_box</i>AddBooks </a>
+            <a href="AddBook"><i class="material-icons blue-text">add_box</i>AddBooks </a>
         </li>
         <li>
 
             <a href="ShowAllBooks"><i class="material-icons blue-text">rate_review</i>See Books
 
-                <a href="#"><i class="material-icons blue-text">library_books</i>See Books
+            <a onclick="allbooks()"><i class="material-icons blue-text">library_books</i>See Books
 
             </a>
         </li>
         <li>
-            <a href="#"><i class="material-icons blue-text">people</i>Show Users </a>
+            <a onclick="allusers("><i class="material-icons blue-text">people</i>Show Users </a>
         </li>
         <li>
             <a href=""><i class="material-icons blue-text">delete_forever</i>DeleteBook
@@ -127,49 +127,64 @@
    
     <div class="content">
         <div class="row" id="show01">
-            <v:forEach var="book" items="${books}">"+    
-            <div class="col s12 l4 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="img/img1.jpg" />
-                        <span class="card-title">Card Title</span>
+            <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+                <div class="card-content blue-text">
+                    <div class="row">
+                        <form class="col s12" action="AddBook" method="POST">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">book</i>
+                                    <input id="icon_prefix" type="text" class="validate" name="bookId">
+                                    <label for="icon_prefix">bookId</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">mode_comment</i>
+                                    <input id="icon_telephone" type="tel" class="validate" name="bookName">
+                                    <label for="icon_telephone">bookName</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">phone</i>
+                                    <input id="icon_telephone" type="tel" class="validate" name="category" >
+                                    <label for="icon_telephone">category</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">perm_identity</i>
+                                    <input id="icon_telephone" type="tel" class="validate" name="author">
+                                    <label for="icon_telephone">author</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">local_parking</i>
+                                    <input id="icon_telephone" type="tel" class="validate" name="publisher">
+                                    <label for="icon_telephone">publisher</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">info</i>
+                                    <input id="icon_telephone" type="tel" class="validate" name="description">
+                                    <label for="icon_telephone">description</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">info</i>
+                                    <input id="icon_telephone" type="submit" value="submit">
+                                    <label for="icon_telephone">submit</label>
+                                </div>
+                            </div>
+                            
+                        </form>
                     </div>
-                    <div class="card-content">
-                        <ul class="collection with-header">
-                            <li class="collection-header">
-                                <h4>BOOK Information</h4>
-                            </li>
-                            <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">bookId:  </b><b>${book.bookId}</b><a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">bookName:  </b><b>${book.bookName}</b><a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">category:  </b><b>${book.category}</b><a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">Author: </b><b>${book.author}</b><a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">publisher:</b><b>${book.publisher}</b><a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
-                            </li>
-                        </ul>
-<!--                        <p style="margin-left: 5px;">Description:</p>-->
+                    
+                    <div class="card-action">
+                        <a href="#" class="btn">Add More Books</a>
+                        <a href="#" class="btn">Home</a>
                     </div>
                 </div>
             </div>
-                            </v:forEach>
+        </div>
+
+
+
+
         </div>
     </div>
     <!-- 
@@ -181,6 +196,7 @@
     <!-- Import jQuery before materialize.js -->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+           
     <script>
         $(document).ready(function () {
             // Custom JS & jQuery here

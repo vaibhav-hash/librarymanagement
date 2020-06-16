@@ -36,22 +36,15 @@ public class IssueBooks extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    
-    @Override
-    public void init(ServletConfig config)
-            throws ServletException {
-        super.init(config); //To change body of generated methods, choose Tools | Templates.
-        try {
-            UseDB db = new UseDB();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(IssueBooks.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(IssueBooks.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+   
     @Override
     public void init() throws ServletException {
+        try {
+            UseDB db = new UseDB();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(IssueBooks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         super.init(); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -62,7 +55,7 @@ public class IssueBooks extends HttpServlet {
             
             ArrayList<Book> books = UseDB.getAvailableBooks();
             
-            request.setAttribute("booksAvailable", books);
+            request.setAttribute("books", books);
             
             RequestDispatcher rd=request.getRequestDispatcher("issueBook.jsp");  
             //servlet2 is the url-pattern of the second servlet  

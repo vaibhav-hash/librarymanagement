@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -69,6 +70,8 @@ public class AddBook extends HttpServlet {
                Book book = new Book(bookId, bookName, category, author, publisher, description, "image_folder/book.jpg" , "");
                
                UseDB.addBook(book);
+               
+              response.sendRedirect("addBook.jsp");
 //            request.getParameter(string)
         }
     }

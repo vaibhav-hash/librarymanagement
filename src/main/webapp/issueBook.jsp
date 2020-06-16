@@ -22,7 +22,7 @@
     <table>    
         <form action="AfterIssueBook" method="POST">
         
-            <c:forEach var="book" items="${booksAvailable}">
+            <c:forEach var="book" items="${books}">
                 <tr>
             <td>${book.bookId}</td>
             <td>${book.bookName}</td>
