@@ -5,6 +5,11 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+ 
+    <welcome-file-list>
+        <welcome-file>user_login.jsp</welcome-file>
+    </welcome-file-list>
+    
     <servlet>
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>nitinPersonalPractice.MyServlet</servlet-class>
@@ -76,5 +81,32 @@ and open the template in the editor.
     <servlet-mapping>
         <servlet-name>UserHomeBooks</servlet-name>
         <url-pattern>/UserHomeBooks</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <servlet-class>servlets.UserLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <url-pattern>/UserLoginServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <servlet-class>servlets.AdminLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <url-pattern>/AdminLoginServlet</url-pattern>
+    </servlet-mapping>
+  
+    <servlet>
+        <servlet-name>AddBook</servlet-name>
+        <servlet-class>servlets.AddBook</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddBook</servlet-name>
+        <url-pattern>/AddBook</url-pattern>
     </servlet-mapping>
 </web-app>

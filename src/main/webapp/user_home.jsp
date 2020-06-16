@@ -43,7 +43,7 @@
 </head>
 
 <body>
-    <v:if test="${session!=null}">
+    <%--<v:if test="${session!=null}">--%>
     <nav class="blue">
         <div class="nav wrapper">
             <div class="container" style="margin-top: 8px; margin-left: 0px; width: 30%;">
@@ -57,12 +57,12 @@
         </ul>
         </div>
     </nav>
-        <% User user=(User)((session.getAttribute("user")));
+        <!--% User user=(User)((session.getAttribute("user")));
                 String userName=user.getUserName().toString();
                 String name=user.getFirstName().toString()+user.getLastName().toString();
                 String email=user.getEmail().toString();
         
-                %>
+                %-->
     <ul class=" side-nav fixed" id="sidenav">
         <li>
             <!-- <div class="user-view"> -->
@@ -75,19 +75,19 @@
             </div>
         </li>
         <li>
-            <a href="" class="tooltipped" data-position="top" data-tooltip="<%= userName %>"><i
-                    class="material-icons blue-text">person</i><%= name %>
+            <a href="" class="tooltipped" data-position="top" data-tooltip="<!--%= userName %-->"><i
+                    class="material-icons blue-text">person</i><!--%= name %-->
             </a>
         </li>
 
         <li>
-            <a href=""><i class="material-icons blue-text">email</i><%= email %></a>
+            <a href=""><i class="material-icons blue-text">email</i><!-%= email %--></a>
         </li>
         <li>
             <a href=""><i class="material-icons blue-text">book</i>IssueBook </a>
         </li>
         <li>
-            <a href=""><i class="material-icons blue-text">rate_review</i>See Books
+            <a href="ShowIsuedBooks"><i class="material-icons blue-text">rate_review</i>See Books
             </a>
         </li>
         <li>
@@ -170,9 +170,9 @@
         });
     </script>
     <script type="text/javascript"></script>
-    </v:if>
-    <v:if test="${session==null}">
-        <% response.sendRedirect("InvalidUser.jsp"); %>
-    </v:if>
+    <%--</v:if>--%>
+    <%--<v:if test="${session==null}">--%>
+        <!--% response.sendRedirect("InvalidUser.jsp"); %-->
+    <%--</v:if>--%>
 </body>
 </html>

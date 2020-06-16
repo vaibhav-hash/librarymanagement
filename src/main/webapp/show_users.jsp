@@ -46,7 +46,6 @@
 </head>
 
 <body>
-    <%--<v:if test="${session!=null}">--%>
     <nav class="blue">
         <div class="nav wrapper">
             <div class="container" style="margin-top: 8px; margin-left: 0px; width: 30%;">
@@ -61,11 +60,9 @@
         </div>
     </nav>
         <% Admin admin=(Admin)((session.getAttribute("admin")));
-                String userName=admin.getUserName().toString();
+                String userName=(admin.getUserName()).toString();
                 String name=admin.getFirstName().toString()+admin.getLastName().toString();
-                String email=admin.getEmail().toString();
-        
-                %>
+                String email=admin.getEmail().toString();%>
     <ul class=" side-nav fixed" id="sidenav">
         <li>
             <!-- <div class="user-view"> -->
@@ -91,18 +88,14 @@
             <a href=""><i class="material-icons blue-text">email</i> <%= email %></a>
         </li>
         <li>
-            <a href="addBook.jsp"><i class="material-icons blue-text">add_box</i>AddBooks </a>
+            <a href=""><i class="material-icons blue-text">add_box</i>AddBooks </a>
         </li>
         <li>
-
-            <a href="ShowAllBooks"><i class="material-icons blue-text">rate_review</i>See Books
-
-                <a href="#"><i class="material-icons blue-text">library_books</i>See Books
-
+            <a onclick="allbooks()"><i class="material-icons blue-text">library_books</i>See Books
             </a>
         </li>
         <li>
-            <a href="#"><i class="material-icons blue-text">people</i>Show Users </a>
+            <a href=""><i class="material-icons blue-text">people</i>Show Users </a>
         </li>
         <li>
             <a href=""><i class="material-icons blue-text">delete_forever</i>DeleteBook
@@ -123,46 +116,40 @@
     </ul>
 
     <!--SideNav Finished-->
-    
-   
     <div class="content">
-        <div class="row" id="show01">
-            <v:forEach var="book" items="${books}">"+    
+        <div class="row">
+            <v:forEach var="user" items="${users}">"+    
             <div class="col s12 l4 m4">
                 <div class="card">
                     <div class="card-image">
                         <img src="img/img1.jpg" />
-                        <span class="card-title">Card Title</span>
+                        <span class="card-title">User</span>
                     </div>
                     <div class="card-content">
                         <ul class="collection with-header">
                             <li class="collection-header">
-                                <h4>BOOK Information</h4>
+                                <h4>User Information</h4>
                             </li>
                             <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">bookId:  </b><b>${book.bookId}</b><a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">userName:  </b><b>${book.bookId}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">bookName:  </b><b>${book.bookName}</b><a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">firstName:  </b><b>${book.bookName}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">category:  </b><b>${book.category}</b><a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">lastName:  </b><b>${book.category}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
                             <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">Author: </b><b>${book.author}</b><a href="#!" class="secondary-content"><i
+                                <div class="red-text"><b class="blue-text">email: </b><b>${book.author}</b><a href="#!" class="secondary-content"><i
                                             class="material-icons">send</i></a>
                                 </div>
                             </li>
-                            <li class="collection-item">
-                                <div class="red-text"><b class="blue-text">publisher:</b><b>${book.publisher}</b><a href="#!" class="secondary-content"><i
-                                            class="material-icons">send</i></a>
-                                </div>
                             </li>
                         </ul>
 <!--                        <p style="margin-left: 5px;">Description:</p>-->
@@ -188,23 +175,5 @@
         });
     </script>
     <script type="text/javascript">
-        function allbooks()
-        {
-            console.log("it is working");
-            document.getElementById("show01").innerHTML=" ";
-            document.getElementById("show01").innerHTML="<h1>sdfusf</h1>";
-                                
-        }
-        function allusers()
-        {
-            console.log("fnjdnjksdkf");
-        }
-    </script>
-    <%--</v:if>--%>
-    <%--<v:if test="${session==null}">--%>
-        <!--%
-            response.sendRedirect("InvalidAdmin.jsp");
-            %-->
-    <%--</v:if>--%>
 </body>
 </html>

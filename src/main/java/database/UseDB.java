@@ -5,8 +5,8 @@
  */
 package database;
 
-import java.sql.*;
 import beans.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ public class UseDB {
     public UseDB() throws ClassNotFoundException, SQLException
     {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connect = DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12346922", "sql12346922" , "E3T8PQ26Yn");
+        connect = DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12348849", "sql12348849" , "QcE4YwhgTw");
         createBookTable();
         createUserTable();
         createAdminTable();
@@ -618,6 +618,35 @@ public class UseDB {
                 rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
                 rs.getString(8)));
             }
+            return bookArr;
+            
+        }
+        catch(Exception e){
+            System.out.println("getIssuedBooks exception caught");
+            return null;
+        }
+        
+    }
+    
+    public static ArrayList<Book> getIssuedBooks(String username){
+        
+        ArrayList<Book> bookArr = new ArrayList<Book>();
+        
+        try{
+            
+            User user = getUser(username);
+          
+            if(user!=null){
+                
+                ArrayList<String> bookIssued = user.getBooksIssued();
+                
+                for(int i = 0; i< bookIssued.size(); i++){
+                    bookArr.add(getBook(bookIssued.get(i)));
+                }
+                
+            }
+            
+          
             return bookArr;
             
         }

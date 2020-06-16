@@ -2,10 +2,12 @@
 <%@ page import="java.util.*" %>
 <%@ page import="beans.*" %>
 <%@ page import="database.*" %>
-<%@ page import="issuebooks.*" %>
 <%@ page import="validate.*" %>
 <%@ page import="servlets.*" %>
+
+
 <%@ page import="filters.*" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +25,7 @@
                 <h1>Welcome Library Web System</h1><br>
                 <h2>Sign In For USERS</h2><br>
 
-                <form id="loginform" action="${pageContext.request.contextPath}/UserLogin" method="POST" onsubmit="return(login())" >
+                <form id="loginform" action="${pageContext.request.contextPath}/UserLoginServlet" method="POST" onsubmit="return(login())" >
                     <label>
                         <span>Username</span>
                         <input type="text" id="uname_l" name="uname" form="loginform" oninput="login()">

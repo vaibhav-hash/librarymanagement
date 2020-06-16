@@ -6,6 +6,7 @@
 package servlets;
 
 import beans.Book;
+import beans.User;
 import database.UseDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,9 +60,13 @@ public class ShowIsuedBooks extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-              ArrayList<Book> IsuedBooks = UseDB.getIssuedBooks();
+            HttpSession session = request.getSession();
+            
+            User user = (User) session.getAttribute("user");
+            
+              ArrayList<Book> IsuedBooks = UseDB.getIssuedBooks(user.getUserName());
               
-              request.setAttribute("isued_books",IsuedBooks);
+              request.setAttribute("books",IsuedBooks);
 //            ArrayList<Book> availableNooks
                 
             RequestDispatcher rd=request.getRequestDispatcher("user_home.jsp");  

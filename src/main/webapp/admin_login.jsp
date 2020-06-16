@@ -2,7 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="beans.*" %>
 <%@ page import="database.*" %>
-<%@ page import="issuebooks.*" %>
+
 <%@ page import="validate.*" %>
 <%@ page import="servlets.*" %>
 <%@ page import="filters.*" %>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="login-content">
 			<!-- <h2 class="title">Welcome</h2> -->
-			<form  action="${pageContext.request.contextPath}/AdminLogin" id="adminloginform"  method="POST" onsubmit="return button()">
+			<form  action="${pageContext.request.contextPath}/AdminLoginServlet" id="adminloginform"  method="POST" onsubmit="return button()">
 				<img src="image_folder/admin_admin.jpg">
 				<h2 class="title">Welcome Library Web System</h2>
 				<h3 class="title">ADMIN LOGIN</h3>				

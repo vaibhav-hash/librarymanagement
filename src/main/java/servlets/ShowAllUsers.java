@@ -30,6 +30,7 @@ public class ShowAllUsers extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
+     * @param config
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -42,10 +43,8 @@ public class ShowAllUsers extends HttpServlet {
     public void init(ServletConfig config)
             throws ServletException {
         try {
-            new UseDB();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            UseDB useDB = new UseDB();
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
         }
         super.init(config); //To change body of generated methods, choose Tools | Templates.
@@ -62,7 +61,7 @@ public class ShowAllUsers extends HttpServlet {
               
               request.setAttribute("users",AllUsers);
                 
-            RequestDispatcher rd=request.getRequestDispatcher("admin_home.jsp");  
+            RequestDispatcher rd=request.getRequestDispatcher("show_users.jsp");  
             //servlet2 is the url-pattern of the second servlet  
   
             rd.forward(request, response);//method may be include or forward  

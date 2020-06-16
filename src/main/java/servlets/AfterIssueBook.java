@@ -5,10 +5,13 @@
  */
 package servlets;
 
+import beans.User;
 import database.UseDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
@@ -16,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,9 +42,7 @@ public class AfterIssueBook extends HttpServlet {
     public void init() throws ServletException {
         try {
             UseDB db = new UseDB();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AfterIssueBook.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AfterIssueBook.class.getName()).log(Level.SEVERE, null, ex);
         }
         super.init(); //To change body of generated methods, choose Tools | Templates.
@@ -52,11 +54,22 @@ public class AfterIssueBook extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String[] names = request.getParameterValues("books");
             
-            for(int i = 0; i<names.length; i++){
-                UseDB.removeBook(names[i]);
+            ArrayList<String> bookIssuedList = (ArrayList<String>) Arrays.asList(names);
+            
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            
+            String username = user.getUserName();
+            
+            for (String bookIssuedList1 : bookIssuedList) {
+                UseDB.setAvailableList(username, bookIssuedList);
             }
             
-            out.println("your available books are removed");
+            user.setBooksIssued(bookIssuedList);
+            session.setAttribute("user", user);
+            
+            response.sendRedirect("UserHomeBooks");
+            
         }
     }
 

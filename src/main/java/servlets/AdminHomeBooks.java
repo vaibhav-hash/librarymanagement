@@ -42,10 +42,8 @@ public class AdminHomeBooks extends HttpServlet {
     public void init(ServletConfig config)
             throws ServletException {
         try {
-            new UseDB();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            UseDB useDB = new UseDB();
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
         }
         super.init(config); //To change body of generated methods, choose Tools | Templates.
