@@ -5,6 +5,10 @@
 
 <%@ page import="validate.*" %>
 <%@ page import="servlets.*" %>
+<<<<<<< HEAD
+=======
+<%@ page import="filters.*" %>
+>>>>>>> e6d655bd66cc9395d6e1828d8ee8f1fea016d065
 
 <!DOCTYPE html>
 <html>
@@ -12,17 +16,17 @@
         <title>Library Management System</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="style_user.css">
+<!--        <link rel="stylesheet" type="text/css" href="style_user.css">-->
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="cont">
-            <div class="form sign-in">
+            <div class="form sign-in"> 
                 </br>
                 <h1>Welcome Library Web System</h1><br>
                 <h2>Sign In For USERS</h2><br>
 
-                <form id="loginform" action="/UserLogin" onsubmit="return(login())" method="GET">
+                <form id="loginform" action="${pageContext.request.contextPath}/UserLogin" method="POST" onsubmit="return(login())" >
                     <label>
                         <span>Username</span>
                         <input type="text" id="uname_l" name="uname" form="loginform" oninput="login()">
@@ -35,10 +39,13 @@
                         <div id="error_message_login"></div>
                     </label>
                     <button class="submit" type="submit" onsubmit="return login()">Log In</button>
-                    <a href="${pageContext.request.contextPath}/admin_login.jsp">
-                    <button type="button" class="submit">ADMIN Login</button>
-                    </a>
-                </form>
+                    </form>
+                    <form action="${pageContext.request.contextPath}/admin_login.jsp" onsubmit="return admin_login()" id="adminlogin">
+<!--                    <a href="${pageContext.request.contextPath}/admin_login.jsp">-->
+                        <button type="submit" class="submit" form="adminlogin" >ADMIN Login</button>
+<!--                    </a>-->
+                    </form>
+                
                 <p class="forgot-pass">Forgot Password ?</p>
 
                 <!-- <div class="social-media">
@@ -215,6 +222,18 @@
                                     error.innerHTML = "";
                                     return true;
                                 }
+                            }
+                            
+                            function admin_login()
+                            {
+                                if (confirm("Proceed ONLY when You are ADMIN")) 
+                                {
+                                    return true;
+                                } else 
+                                {
+                                    return false;
+                                }
+ 
                             }
 
 </script>

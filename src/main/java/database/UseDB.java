@@ -5,8 +5,8 @@
  */
 package database;
 
-import java.sql.*;
 import beans.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ public class UseDB {
     public UseDB() throws ClassNotFoundException, SQLException
     {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connect = DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12346922", "sql12346922" , "E3T8PQ26Yn");
+        connect = DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12348849", "sql12348849" , "QcE4YwhgTw");
         createBookTable();
         createUserTable();
         createAdminTable();
@@ -120,7 +120,7 @@ public class UseDB {
     
         try{
           
-            final String query = "SELECT * FROM User WHERE username = ? AND password = ?";
+            final String query = "SELECT * FROM User WHERE userName = ? AND password = ?";
             
             PreparedStatement pstate = connect.prepareStatement(query);
             
@@ -132,10 +132,15 @@ public class UseDB {
             User user = null;
             
             if(rs.next()){
+//                rs.beforeFirst();
                 String[] bookSplit = rs.getString("booksIssued").split(",");
+//                ArrayList<String> bookSplitList = new ArrayList<String>;
             
-            
-                ArrayList<String> bookSplitList = (ArrayList<String>) Arrays.asList(bookSplit);
+                
+                
+                ArrayList<String> bookSplitList = new ArrayList<String>( Arrays.asList(bookSplit));
+                
+                
                 
                 user = new User(rs.getString(1),
                 rs.getString(2),
@@ -147,7 +152,7 @@ public class UseDB {
              return user;
         }
         catch(Exception e){
-            System.out.println("getUser exception caught"); 
+            System.out.println("getUser exception caught " + e.getMessage()); 
             return null;
         }
         
@@ -244,25 +249,42 @@ public class UseDB {
             ResultSet rs2 = pstate2.executeQuery();
             
             
-            if(rs1==null && rs2==null )
+//            if(rs1.next()==false && rs2.next()==false )
+//            {
+//                System.out.println("everything null");
+//                return "false";
+//                
+//            }
+//            else 
+//            {                
+//                rs1.beforeFirst();
+//                rs2.beforeFirst();
+//                
+//                if( rs1.next()==true )
+//                {
+//                    return "Username";
+//                }
+//                else
+//                {    
+//                    System.out.println(uname + " " + rs1.getString("userName"));
+//                    return "Email";
+//                }
+//                
+//            }
+            
+            if( rs1.next()==true )
             {
-                System.out.println("everything null");
-                return "false";
-                
-            }
-            else if( rs1!=null )
-            {
-                System.out.println(uname + " " + rs1.getString("userName"));
                 return "Username";
+            }
+            else if ( rs2.next()==true )
+            {
+                return "Email";
             }
             else
             {
-                System.out.println(email + " " + rs2.getString("email"));
-                return "Email";
+                return "false";
             }
-                      
-           
-               
+                                                           
         }
         catch(Exception e){
             System.out.println("isUserRepeated exception " + e.getMessage());

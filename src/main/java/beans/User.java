@@ -4,13 +4,9 @@
  * and open the template in the editor.
  */
 package beans;
+import  java.util.*;
 
-import java.util.*;
 
-/**
- *
- * @author Administrator
- */
 public class User extends Person{
     
     private ArrayList<String> booksIssued;
@@ -32,6 +28,6 @@ public class User extends Person{
     public void setBooksIssued(ArrayList<String> booksIssued) {
         this.booksIssued = booksIssued;
     }
-    
-    
+   
+     
 }

@@ -18,8 +18,33 @@ and open the template in the editor.
         <servlet-class>servlets.AfterIssueBook</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>ReturnBooks</servlet-name>
         <servlet-class>servlets.ReturnBooks</servlet-class>
+=======
+        <servlet-name>AdminHomeBooks</servlet-name>
+        <servlet-class>servlets.AdminHomeBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllAvailableBooks</servlet-name>
+        <servlet-class>servlets.AllAvailableBooks_admin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllAvailableBooks_user</servlet-name>
+        <servlet-class>servlets.AllAvailableBooks_user</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowAllUsers</servlet-name>
+        <servlet-class>servlets.ShowAllUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowIsuedBooks</servlet-name>
+        <servlet-class>servlets.ShowIsuedBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserHomeBooks</servlet-name>
+        <servlet-class>servlets.UserHomeBooks</servlet-class>
+>>>>>>> e6d655bd66cc9395d6e1828d8ee8f1fea016d065
     </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
@@ -34,6 +59,7 @@ and open the template in the editor.
         <url-pattern>/AfterIssueBook</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>ReturnBooks</servlet-name>
         <url-pattern>/ReturnBooks</url-pattern>
     </servlet-mapping>
@@ -48,4 +74,29 @@ and open the template in the editor.
         <url-pattern>/ShowAllBooks</url-pattern>
     </servlet-mapping>
     
+=======
+        <servlet-name>AdminHomeBooks</servlet-name>
+        <url-pattern>/AdminHomeBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllAvailableBooks</servlet-name>
+        <url-pattern>/AllAvailableBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllAvailableBooks_user</servlet-name>
+        <url-pattern>/AllAvailableBooks_user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAllUsers</servlet-name>
+        <url-pattern>/ShowAllUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowIsuedBooks</servlet-name>
+        <url-pattern>/ShowIsuedBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserHomeBooks</servlet-name>
+        <url-pattern>/UserHomeBooks</url-pattern>
+    </servlet-mapping>
+>>>>>>> e6d655bd66cc9395d6e1828d8ee8f1fea016d065
 </web-app>
