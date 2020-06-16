@@ -60,11 +60,9 @@
         </div>
     </nav>
         <% Admin admin=(Admin)((session.getAttribute("admin")));
-                String userName=admin.getUserName().toString();
+                String userName=(admin.getUserName()).toString();
                 String name=admin.getFirstName().toString()+admin.getLastName().toString();
-                String email=admin.getEmail().toString();
-        
-                %>
+                String email=admin.getEmail().toString();%>
     <ul class=" side-nav fixed" id="sidenav">
         <li>
             <!-- <div class="user-view"> -->
@@ -97,7 +95,7 @@
             </a>
         </li>
         <li>
-            <a onclick="allusers("><i class="material-icons blue-text">people</i>Show Users </a>
+            <a href=""><i class="material-icons blue-text">people</i>Show Users </a>
         </li>
         <li>
             <a href=""><i class="material-icons blue-text">delete_forever</i>DeleteBook
