@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin1
  */
-public class Admin_Home extends HttpServlet {
-    
+public class UserHomeBooks extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,12 +58,12 @@ public class Admin_Home extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-              ArrayList<Book> availableBooks = UseDB.getBooks();
+              ArrayList<Book> AllBooks = UseDB.getBooks();
               
-              request.setAttribute("books", availableBooks);
+              request.setAttribute("books", AllBooks);
 //            ArrayList<Book> availableNooks
                 
-            RequestDispatcher rd=request.getRequestDispatcher("admin_home.jsp");  
+            RequestDispatcher rd=request.getRequestDispatcher("user_home.jsp");  
             //servlet2 is the url-pattern of the second servlet  
   
             rd.forward(request, response);//method may be include or forward  
@@ -119,5 +119,4 @@ public class Admin_Home extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-   
 }

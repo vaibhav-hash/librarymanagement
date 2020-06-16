@@ -77,7 +77,6 @@
                     class="material-icons blue-text">person</i>Admin_name
             </a>
         </li>
-
         <li>
             <a href=""><i class="material-icons blue-text">email</i>email </a>
         </li>
@@ -85,11 +84,11 @@
             <a href=""><i class="material-icons blue-text">add_box</i>AddBooks </a>
         </li>
         <li>
-            <a href=""><i class="material-icons blue-text">library_books</i>See Books
+            <a onclick="allbooks()"><i class="material-icons blue-text">library_books</i>See Books
             </a>
         </li>
         <li>
-            <a href=""><i class="material-icons blue-text">people</i>Show Users </a>
+            <a onclick="allusers("><i class="material-icons blue-text">people</i>Show Users </a>
         </li>
         <li>
             <a href=""><i class="material-icons blue-text">delete_forever</i>DeleteBook
@@ -111,8 +110,8 @@
 
     <!--SideNav Finished-->
     <div class="content">
-        <div class="row">
-           <v:forEach var="book" items="${books}" >    
+        <div class="row" id="show01">
+            <v:forEach var="book" items="${books}">"+    
             <div class="col s12 l4 m4">
                 <div class="card">
                     <div class="card-image">
@@ -172,7 +171,19 @@
             $(".button-collapse").sideNav();
         });
     </script>
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+        function allbooks()
+        {
+            console.log("it is working");
+            document.getElementById("show01").innerHTML=" ";
+            document.getElementById("show01").innerHTML="<h1>sdfusf</h1>";
+                                
+        }
+        function allusers()
+        {
+            console.log("fnjdnjksdkf");
+        }
+    </script>
 </body>
 
 </html>
