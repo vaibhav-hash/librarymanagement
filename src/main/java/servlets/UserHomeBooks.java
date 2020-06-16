@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin1
+ * @author nitin
  */
 public class UserHomeBooks extends HttpServlet {
 
@@ -30,10 +30,8 @@ public class UserHomeBooks extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param config
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      * 
      */
     
@@ -42,10 +40,8 @@ public class UserHomeBooks extends HttpServlet {
     public void init(ServletConfig config)
             throws ServletException {
         try {
-            new UseDB();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            UseDB db = new UseDB();
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ShowAllBooks.class.getName()).log(Level.SEVERE, null, ex);
         }
         super.init(config); //To change body of generated methods, choose Tools | Templates.
@@ -58,17 +54,15 @@ public class UserHomeBooks extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-              ArrayList<Book> AllBooks = UseDB.getBooks();
+              ArrayList<Book> availableBooks = UseDB.getAvailableBooks();
               
-              request.setAttribute("books", AllBooks);
+              request.setAttribute("books", availableBooks);
 //            ArrayList<Book> availableNooks
                 
             RequestDispatcher rd=request.getRequestDispatcher("user_home.jsp");  
             //servlet2 is the url-pattern of the second servlet  
   
-            rd.forward(request, response);//method may be include or forward  
-
-
+            rd.forward(request, response); 
         }
     }
 

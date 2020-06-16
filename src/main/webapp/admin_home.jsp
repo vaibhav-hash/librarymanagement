@@ -46,7 +46,7 @@
 </head>
 
 <body>
-    <v:if test="${session!=null}">
+    <%--<v:if test="${session!=null}">--%>
     <nav class="blue">
         <div class="nav wrapper">
             <div class="container" style="margin-top: 8px; margin-left: 0px; width: 30%;">
@@ -94,11 +94,11 @@
             <a href=""><i class="material-icons blue-text">add_box</i>AddBooks </a>
         </li>
         <li>
-<<<<<<< HEAD
+
             <a href="ShowAllBooks"><i class="material-icons blue-text">rate_review</i>See Books
-=======
+
             <a onclick="allbooks()"><i class="material-icons blue-text">library_books</i>See Books
->>>>>>> e6d655bd66cc9395d6e1828d8ee8f1fea016d065
+
             </a>
         </li>
         <li>
@@ -200,11 +200,11 @@
             console.log("fnjdnjksdkf");
         }
     </script>
-    </v:if>
-    <v:if test="${session==null}">
-        <%
+    <%--</v:if>--%>
+    <%--<v:if test="${session==null}">--%>
+        <!--%
             response.sendRedirect("InvalidAdmin.jsp");
-            %>
-    </v:if>
+            %-->
+    <%--</v:if>--%>
 </body>
 </html>

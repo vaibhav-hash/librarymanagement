@@ -10,10 +10,11 @@ import beans.*;
 import database.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,46 +30,49 @@ public class UserLoginServlet extends HttpServlet {
     String message1 = "";
     String message2 = "";
     String color = "red";
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            UseDB db = new UseDB();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+    }
    
     
+    @Override
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String uname = request.getParameter("uname").toString();
-        String password = request.getParameter("password").toString();
+        String uname = request.getParameter("uname");
+        String password = request.getParameter("password");
         
         HttpSession session = request.getSession();
         
-        try {
-            UseDB db = new UseDB();
-            User user = db.getUser(uname,password);
-            
-            if( user!=null )
-            {
-                session.setAttribute("user", user);
-                message1 = "Login Successfull " + user.getFirstName() + " " + user.getLastName();
-                message2 = "Redirecting To User Home Page...";
-                destination = "/librarymanagement/UserHomeBooks";
-                color = "green";
-            }
-            else
-            {
-                message1 = "Login Failed Invalid Username OR Password  ";
-                message2 = "Redirecting to Login-User Page...";
-                destination = "/librarymanagement/user_login.jsp";
-                color = "red";
-            }
-            
-        } catch (Exception ex) 
+        User user = UseDB.getUser(uname,password);
+        
+        if( user!=null ) 
         {
-            Logger.getLogger(UserLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            message1 = "Server OR Database Problems " + ex.getMessage();
-            message2 = "Redirect to Login-User Page...";
-            destination = "/librarymanagement/user_login.jsp";
+            session.setAttribute("user", user);
+            message1 = "Login Successfull " + user.getFirstName() + " " + user.getLastName();
+            message2 = "Redirecting To User Home Page...";
+            destination = "UserHomeBooks";
+            color = "green";
+        }
+        else
+        {
+            message1 = "Login Failed Invalid Username OR Password  ";
+            message2 = "Redirecting to Login-User Page...";
+            destination = "user_login.jsp";
             color = "red";
         }    
         
-        response.setHeader("Refresh", "5; URL="+destination);
+//        response.setHeader("Refresh", "5; URL="+destination);
+        RequestDispatcher rd=request.getRequestDispatcher(destination);  
+  
+        rd.forward(request, response);//method may be include or forward  
         
         response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -80,7 +84,7 @@ public class UserLoginServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-            if( color=="red" )
+            if( "red".equals(color) )
             {
                 out.println("<br><h1 style=\"color:red;\" >" + message1 + "</h1><br>");
                 out.println("<h1 style=\"color:red;\" >" + message2 + "</h1>");

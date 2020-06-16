@@ -5,12 +5,19 @@
  */
 package servlets;
 
+import beans.User;
+import database.UseDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,6 +25,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ReturnBooks extends HttpServlet {
 
+    @Override
+    public void init() throws ServletException {
+        try {
+            UseDB db = new UseDB();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ReturnBooks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,6 +51,27 @@ public class ReturnBooks extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            
+            String username = user.getUserName();
+            
+            ArrayList<String> returnBooks = new ArrayList<String>();
+            
+            ArrayList<String> currentIssuedBooks = user.getBooksIssued();
+            
+            for(int i = 0; i< currentIssuedBooks.size(); i++ ){
+                
+                UseDB.setAvailable(currentIssuedBooks.get(i), "");
+            }
+            UseDB.setAvailableList(username, returnBooks);
+            
+            user.setBooksIssued(returnBooks);
+
+            session.setAttribute("user", user);
+            
+            response.sendRedirect("user_login");
+   
         }
     }
 
