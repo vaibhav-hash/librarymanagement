@@ -62,7 +62,7 @@ public class ShowAllUsers extends HttpServlet {
               
               request.setAttribute("users",AllUsers);
                 
-            RequestDispatcher rd=request.getRequestDispatcher("admin_home.jsp");  
+            RequestDispatcher rd=request.getRequestDispatcher("show_users.jsp");  
             //servlet2 is the url-pattern of the second servlet  
   
             rd.forward(request, response);//method may be include or forward  
