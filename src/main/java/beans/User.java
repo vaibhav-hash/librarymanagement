@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package beans;
+
 import  java.util.*;
+
 
 
 public class User extends Person{

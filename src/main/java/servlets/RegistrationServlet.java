@@ -44,11 +44,12 @@ public class RegistrationServlet extends HttpServlet implements Filter {
         String destination = "";
         HttpSession session = request.getSession();
         User user = new User();
-        String uname = request.getParameter("uname").toString();
-        String password = request.getParameter("password").toString();
+        
         
         try
-        {    
+        {  
+            String uname = request.getParameter("uname").toString();
+            String password = request.getParameter("password").toString();
             String fname = request.getParameter("fname").toString();
             String lname = request.getParameter("lname").toString();            
             String email = request.getParameter("email").toString();
@@ -122,21 +123,13 @@ public class RegistrationServlet extends HttpServlet implements Filter {
         
 //            response.setHeader("Refresh", "10; URL="+destination);
 
-            if( result=="false")
-            {
-                System.out.println("Going to Home Page");
-                
-            }
-            else
-            {
-                System.out.println("Going to LOgin Page");
-                
-            }
+            
         }
         catch(Exception e)
         {
             System.out.println("Error at Registration Servlet " + e.getMessage());
             destination = "/librarymanagement/user_login.jsp";
+            response.sendRedirect("/librarymanagement/user_login.jsp");
         }
         
     }
@@ -154,7 +147,21 @@ public class RegistrationServlet extends HttpServlet implements Filter {
 
     @Override
     public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        HttpServletRequest request = (HttpServletRequest)sr;
+        
+        String uname = request.getParameter("uname").toString();
+        
+        if( uname==null )
+        {
+            System.out.println("Invalid Input");
+        }
+        else
+        {
+            System.out.println("Valid Input");
+            fc.doFilter(sr,sr1);
+            
+        }
     }
 
     

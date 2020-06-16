@@ -16,5 +16,9 @@ class response {
     static HttpSession getSession() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    static void sendRedirect(String librarymanagementuser_loginjsp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
